@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 Color PLOShadowColor = const Color.fromARGB(200, 0, 0, 0);
 
@@ -163,11 +164,10 @@ Widget passwordInputBox(
             style: TextStyle(fontSize: fontSize),
             decoration: InputDecoration(
               suffixIcon: IconButton(
-                icon: Icon(
-                  passwordVisible ? Icons.visibility_off : Icons.visibility,
-                ),
-                onPressed: onPressed
-              ),
+                  icon: Icon(
+                    passwordVisible ? Icons.visibility_off : Icons.visibility,
+                  ),
+                  onPressed: onPressed),
             ),
           ),
         ),
@@ -177,5 +177,113 @@ Widget passwordInputBox(
         style: const TextStyle(color: Colors.red, fontSize: 12),
       )
     ],
+  );
+}
+
+PopupMenuItem<Object> dropMenuItem({
+  required dynamic val,
+  Widget? iconData,
+  required String text,
+  required double textFontSize,
+}) {
+  return PopupMenuItem(
+    value: val,
+    child: Row(
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(right: 10.0),
+          child: iconData!,
+        ),
+        Text(
+          text,
+          style: TextStyle(
+            fontSize: textFontSize,
+          ),
+        ),
+      ],
+    ),
+  );
+}
+
+Widget dropMenu({
+  required List<PopupMenuEntry<dynamic>> Function(BuildContext) items,
+  required Function(dynamic) onSelected,
+  Widget? child,
+}) {
+  return PopupMenuButton(
+    itemBuilder: items,
+    onSelected: onSelected,
+    child: child,
+  );
+}
+
+Widget shadowBox({
+  required double width,
+  required double height,
+  required double circularRadius,
+  required Offset offset,
+}) {
+  return Container(
+    width: width,
+    height: height,
+    decoration: BoxDecoration(
+      borderRadius: BorderRadius.circular(circularRadius),
+      boxShadow: [
+        BoxShadow(
+          color: Colors.black.withOpacity(0.25),
+          blurRadius: 4,
+          offset: offset,
+        ),
+      ],
+    ),
+  );
+}
+
+Widget textFormFieldErr({
+  TextInputType? inputType,
+  List<TextInputFormatter>? inputRules,
+  required double circularRadius,
+  required String? Function(String?) validator,
+  TextInputAction? textInputAction,
+}) {
+  return TextFormField(
+    keyboardType: inputType,
+    inputFormatters: inputRules,
+    style: const TextStyle(color: Colors.black),
+    decoration: InputDecoration(
+      fillColor: Colors.white,
+      filled: true,
+      isDense: true,
+      errorStyle: const TextStyle(
+        fontSize: 12.0,
+        color: Color(0xFFFF0000),
+      ),
+      border: const OutlineInputBorder(
+        borderSide: BorderSide(color: Colors.white),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(circularRadius),
+        borderSide: const BorderSide(color: Colors.blue),
+      ),
+      enabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(circularRadius),
+        borderSide: const BorderSide(color: Colors.black),
+      ),
+      focusedErrorBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(circularRadius),
+        borderSide: const BorderSide(color: Colors.red),
+      ),
+      errorBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(circularRadius),
+        borderSide: const BorderSide(color: Colors.black),
+      ),
+    ),
+    validator: validator,
+    /*
+    text == null | text.isEmpty
+        ? "닉네임을 입력해주세요"
+        : (nameExists(text) ? "이미 존재하는 닉네임입니다" : null),
+    */
+    textInputAction: textInputAction,
   );
 }
