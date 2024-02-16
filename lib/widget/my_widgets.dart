@@ -245,8 +245,10 @@ Widget textFormFieldErr({
   required double circularRadius,
   required String? Function(String?) validator,
   TextInputAction? textInputAction,
+  TextEditingController? controller
 }) {
   return TextFormField(
+    controller: controller,
     keyboardType: inputType,
     inputFormatters: inputRules,
     style: const TextStyle(color: Colors.black),

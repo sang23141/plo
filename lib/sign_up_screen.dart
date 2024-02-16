@@ -4,17 +4,16 @@ import 'package:email_vertify/vertification_code.dart';
 import 'package:email_vertify/widget/my_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:email_vertify/common/validator/validator.dart';
 
-class EmailVerificationScreen extends ConsumerStatefulWidget {
-  const EmailVerificationScreen({super.key});
+class Sign_upScreen extends ConsumerStatefulWidget {
+  const Sign_upScreen({super.key});
 
   @override
-  ConsumerState<EmailVerificationScreen> createState() =>
-      _EmailVerificationScreenState();
+  ConsumerState<Sign_upScreen> createState() => _Sign_upScreenState();
 }
 
-class _EmailVerificationScreenState
-    extends ConsumerState<EmailVerificationScreen> {
+class _Sign_upScreenState extends ConsumerState<Sign_upScreen> {
   bool invalidEmail = false;
   bool invalidPassword = false;
   bool notSamePassword = false;
@@ -28,10 +27,9 @@ class _EmailVerificationScreenState
   void initState() {
     super.initState();
     //Provider wriiten to save state when user goes to next page and come back
-    final signUpInfo = ref.read(signUpInfoProvider);
-    email = signUpInfo["email"]!;
-    password = signUpInfo["password"]!;
-    passwordRetype = signUpInfo["passwordRetype"]!;
+    ref
+        .read(signUpInfoProvider.notifier)
+        .setEmailAndPassword(email, password, passwordRetype);
   }
 
   @override
@@ -42,33 +40,38 @@ class _EmailVerificationScreenState
     super.dispose();
   }
 
-  // Function to validate PSU email format
-  bool validatePSUEmail(String email) {
-    RegExp regExp = RegExp(r'[a-z]{3}[0-9]{1,4}@psu.edu');
-    return regExp.hasMatch(email);
-  }
+  // // Function to validate PSU email format
+  // bool validatePSUEmail(String email) {
+  //   RegExp regExp = RegExp(r'[a-z]{3}[0-9]{1,4}@psu.edu');
+  //   return regExp.hasMatch(email);
+  // }
 
-  bool validatePassword(String password) {
-    RegExp regExp = RegExp(
-        r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$');
-    return regExp.hasMatch(password);
-  }
+  // bool validatePassword(String password) {
+  //   RegExp regExp = RegExp(
+  //       r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$');
+  //   return regExp.hasMatch(password);
+  // }
 
-  bool isSamePassword(String password, String passwordRetype) {
-    if (passwordRetype.isEmpty) {
-      return false;
-    }
+  // bool isSamePassword(String password, String passwordRetype) {
+  //   if (passwordRetype.isEmpty) {
+  //     return false;
+  //   }
 
-    return password == passwordRetype;
-  }
+  //   return password == passwordRetype;
+  // }
 
   // Function to send verification code to email
   void sendVertCodeToEmail() {
-    if (isSamePassword(password.text, passwordRetype.text) &&
-        validatePSUEmail(email.text) &&
-        validatePassword(password.text)) {
+    String? emailError = Validator.validatePSUEmail(email.text);
+    String? passwordError = Validator.validatePassword(password.text);
+    String? passwordRetypeError =
+        Validator.isSamePassword(password.text, passwordRetype.text);
+
+    if (emailError == null &&
+        passwordError == null &&
+        passwordRetypeError == null) {
       setState(() {
-        isLoading = true; // Show loading indicator
+        isLoading = true;
         invalidEmail = false;
         invalidPassword = false;
         notSamePassword = false;
@@ -100,25 +103,12 @@ class _EmailVerificationScreenState
       });
     } else {
       //Three must be declared as false at the begining else it will continously show the error message even though the error is gone.
-      invalidEmail = false;
-      invalidPassword = false;
-      notSamePassword = false;
-      if (validatePSUEmail(email.text) == false) {
-        setState(() {
-          invalidEmail = true;
-        });
-      }
-      if (validatePassword(password.text) == false) {
-        setState(() {
-          invalidPassword = true;
-        });
-      }
-
-      if (isSamePassword(password.text, passwordRetype.text) == false) {
-        setState(() {
-          notSamePassword = true;
-        });
-      }
+      setState(() {
+        isLoading = false;
+        invalidEmail = false;
+        invalidPassword = false;
+        notSamePassword = false;
+      });
     }
   }
 

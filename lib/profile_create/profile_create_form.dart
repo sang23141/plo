@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:email_vertify/widget/my_widgets.dart';
-
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 //프로필 상세 입력 Stateful TextFormField 및 확인 버튼
 class ProfileForm extends StatefulWidget {
   const ProfileForm({super.key});
@@ -12,9 +12,9 @@ class ProfileForm extends StatefulWidget {
 
 class _ProfileFormState extends State<ProfileForm> {
   final _formKey = GlobalKey<FormState>();
-  String nickname = "";
-  int grade = 0;
-  String major = "";
+  TextEditingController nickname = TextEditingController();
+  TextEditingController grade = TextEditingController();
+  TextEditingController major = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -48,6 +48,7 @@ class _ProfileFormState extends State<ProfileForm> {
                         ),
                         textFormFieldErr(
                           circularRadius: 9.0,
+                          controller: nickname,
                           validator: (text) {
                             if (text == null || text.isEmpty) {
                               return "닉네임을 입력해주세요";
@@ -88,6 +89,7 @@ class _ProfileFormState extends State<ProfileForm> {
                           offset: const Offset(0, 1),
                         ),
                         textFormFieldErr(
+                          controller: grade,
                           inputType: TextInputType.number,
                           inputRules: <TextInputFormatter>[
                             FilteringTextInputFormatter.allow(
@@ -101,8 +103,6 @@ class _ProfileFormState extends State<ProfileForm> {
                             if (text == null || text.isEmpty) {
                               return "학년을 입력해주세요";
                             }
-                            var tempGrade = int.parse(text);
-                            grade = tempGrade;
                             return null;
                           },
                           textInputAction: TextInputAction.next,
@@ -135,6 +135,7 @@ class _ProfileFormState extends State<ProfileForm> {
                         ),
                         textFormFieldErr(
                           circularRadius: 9.0,
+                          controller: major,
                           validator: (text) {
                             //아무 값도 입력하지 않았을 시
                             if (text == null || text.isEmpty) {
@@ -142,7 +143,6 @@ class _ProfileFormState extends State<ProfileForm> {
                             }
                             //올바르지 않은 값 입력 시
                             //...
-                            major = text;
                             return null;
                           },
                           textInputAction: TextInputAction.done,

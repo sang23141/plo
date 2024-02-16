@@ -39,12 +39,14 @@ dependencies:
   firebase_auth: ^4.15.3
   email_auth: ^1.1.1
   google_fonts: ^6.1.0
-  firebase_core: ^2.24.2
+  firebase_core: ^2.25.4
   email_validator: ^2.1.17
   flutter_pw_validator: ^1.6.0
   email_otp: ^2.1.1
   http: ^1.1.0
   flutter_riverpod: ^2.4.10
+  cloud_firestore: ^4.15.4
+  image_picker: ^1.0.7
 
 dev_dependencies:
   flutter_test:
