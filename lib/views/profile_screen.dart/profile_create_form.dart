@@ -1,6 +1,7 @@
+import 'package:email_vertify/common/validator/validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:email_vertify/widget/my_widgets.dart';
+import 'package:email_vertify/common/widget/my_widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 //프로필 상세 입력 Stateful TextFormField 및 확인 버튼
 class ProfileForm extends StatefulWidget {
@@ -10,12 +11,15 @@ class ProfileForm extends StatefulWidget {
   State<ProfileForm> createState() => _ProfileFormState();
 }
 
+
 class _ProfileFormState extends State<ProfileForm> {
   final _formKey = GlobalKey<FormState>();
+
+  
+
   TextEditingController nickname = TextEditingController();
   TextEditingController grade = TextEditingController();
   TextEditingController major = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -49,17 +53,7 @@ class _ProfileFormState extends State<ProfileForm> {
                         textFormFieldErr(
                           circularRadius: 9.0,
                           controller: nickname,
-                          validator: (text) {
-                            if (text == null || text.isEmpty) {
-                              return "닉네임을 입력해주세요";
-                            }
-                            return null;
-                            /*
-                            text == null | text.isEmpty
-                                ? "닉네임을 입력해주세요"
-                                : (nameExists(text) ? "이미 존재하는 닉네임입니다" : null),
-                            */
-                          },
+                          validator: (value) =>Validator.validateNickName(value),
                           textInputAction: TextInputAction.next,
                         ),
                       ],
@@ -98,13 +92,7 @@ class _ProfileFormState extends State<ProfileForm> {
                             LengthLimitingTextInputFormatter(1),
                           ],
                           circularRadius: 9.0,
-                          validator: (text) {
-                            //아무 값도 입력하지 않았을 시
-                            if (text == null || text.isEmpty) {
-                              return "학년을 입력해주세요";
-                            }
-                            return null;
-                          },
+                          validator: (value) => Validator.validateGrade(value),
                           textInputAction: TextInputAction.next,
                         ),
                       ],
@@ -136,15 +124,7 @@ class _ProfileFormState extends State<ProfileForm> {
                         textFormFieldErr(
                           circularRadius: 9.0,
                           controller: major,
-                          validator: (text) {
-                            //아무 값도 입력하지 않았을 시
-                            if (text == null || text.isEmpty) {
-                              return "전공을 입력해주세요";
-                            }
-                            //올바르지 않은 값 입력 시
-                            //...
-                            return null;
-                          },
+                          validator: (value) => Validator.validateMajor(value),
                           textInputAction: TextInputAction.done,
                         ),
                       ],
@@ -182,16 +162,9 @@ class _ProfileFormState extends State<ProfileForm> {
                     ),
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
-                        /*
-                        profileSubmit(
-                          "test_email@psu.edu",
-                          nickname,
-                          grade,
-                          major,
-                        );
-                        */
-                        print("helo");
-                        //다음 페이지로
+                       
+                        print("hell o");
+                       
                       }
                     },
                     child: const Text(

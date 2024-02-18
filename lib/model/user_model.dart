@@ -29,4 +29,22 @@ class UserModel {
       }
     };
   }
+  static UserModel? fromJson(Map<String, dynamic> json) {
+   try {
+    return UserModel (
+      userUid: json[UserModelNameConstants.userUid] ?? 
+      ErrorReplacementConstants.notFoundString,
+      email: json[UserModelNameConstants.email] ?? 
+      ErrorReplacementConstants.notFoundString,
+      userCreatedDate: json[UserModelNameConstants.userCreatedDate] ,
+      profile: json[UserModelNameConstants.profile] == null ? const {} : (json[UserModelNameConstants.profile]
+      )
+
+
+    );
+   } catch (error) {
+    print("Error while converting json to User Object : ${error.toString()}");
+    return null;
+   }
+  }
 }

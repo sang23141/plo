@@ -2,8 +2,9 @@ import 'package:email_vertify/model/erro_handling/error_handling_auth.dart';
 import 'package:email_vertify/model/types/enum_type.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class FirebaseAuthRepositor {
+class FirebaseAuthRepository {
   static const repoName = 'FirebaseAuthRepository';
   final FirebaseAuth firebase = FirebaseAuth.instance;
   User? getCurrentUser() {
@@ -13,7 +14,7 @@ class FirebaseAuthRepositor {
   //sign-up User
   Future<String> signupUser(String email, String password) async {
     try {
-      await firebase.createUserWithEmailAndPassword(email: email, password: password);
+      await firebase.createUserWithEmailAndPassword(email: email, password: password,);
       return ReturnTypeENUM.success.toString();
     }
     // case of auth error
@@ -29,5 +30,23 @@ class FirebaseAuthRepositor {
       return error.toString();
     }
   }
+  Future<String> signinUser (String email, String password) async {
+    try {
+      await firebase.signInWithEmailAndPassword(email: email, password: password);
+      return ReturnTypeENUM.success.toString();
+    }
+    on FirebaseAuthException catch (error) {
+      String errorText = ErrorHandlerFunction().signInErrorToString(error);
+      return errorText;
+    }
+    catch (error) {
+      print("Error${error.toString()} in signInUser() in $repoName");
+      return error.toString();
+    }
+  }
 
 }
+
+final firebaseAuthRepositoryProvider = Provider<FirebaseAuthRepository>((ref) {
+  return FirebaseAuthRepository();
+});
