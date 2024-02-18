@@ -1,19 +1,29 @@
 import 'package:email_vertify/common/validator/validator.dart';
+import 'package:email_vertify/repository/auth_repository.dart';
+import 'package:email_vertify/views/profile_screen.dart/profile_controller.dart';
+import 'package:email_vertify/views/sign_up_screen_view.dart/signup_provider.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:email_vertify/common/widget/my_widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'dart:io';
 //프로필 상세 입력 Stateful TextFormField 및 확인 버튼
-class ProfileForm extends StatefulWidget {
+class ProfileForm extends ConsumerStatefulWidget {
   const ProfileForm({super.key});
 
   @override
-  State<ProfileForm> createState() => _ProfileFormState();
+  ConsumerState<ProfileForm> createState() => _ProfileFormState();
 }
 
 
-class _ProfileFormState extends State<ProfileForm> {
+class _ProfileFormState extends ConsumerState<ProfileForm> {
+  @override
+  void initState() {
+    super.initState();
+  }
   final _formKey = GlobalKey<FormState>();
+  final auth = AuthMethods();
 
   
 
@@ -22,6 +32,11 @@ class _ProfileFormState extends State<ProfileForm> {
   TextEditingController major = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    final user = FirebaseAuth.instance.currentUser;
+    final signupInfo = ref.watch(signUpInfoProvider);
+    final email = signupInfo['email'] ?? '';
+    final password = signupInfo['password'] ?? '';
+    File? profilePic = ref.read(selectedFile);
     return Form(
       key: _formKey,
       child: Column(
@@ -160,10 +175,9 @@ class _ProfileFormState extends State<ProfileForm> {
                         ),
                       ),
                     ),
-                    onPressed: () {
+                    onPressed: () async {
                       if (_formKey.currentState!.validate()) {
-                       
-                        print("hell o");
+                        String result = await auth.signUpUser(email: email, password: password, nickname: nickname.text, grade: grade.text, major: major.text, file:profilePic);
                        
                       }
                     },
