@@ -1,7 +1,7 @@
-import 'package:email_vertify/providers/signup_provider.dart';
+import 'package:email_vertify/views/sign_up_screen_view.dart/signup_provider.dart';
 import 'package:email_vertify/services/api_service.dart';
 import 'package:email_vertify/vertification_code.dart';
-import 'package:email_vertify/widget/my_widgets.dart';
+import 'package:email_vertify/common/widget/my_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:email_vertify/common/validator/validator.dart';
@@ -39,26 +39,6 @@ class _Sign_upScreenState extends ConsumerState<Sign_upScreen> {
     passwordRetype.dispose();
     super.dispose();
   }
-
-  // // Function to validate PSU email format
-  // bool validatePSUEmail(String email) {
-  //   RegExp regExp = RegExp(r'[a-z]{3}[0-9]{1,4}@psu.edu');
-  //   return regExp.hasMatch(email);
-  // }
-
-  // bool validatePassword(String password) {
-  //   RegExp regExp = RegExp(
-  //       r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$');
-  //   return regExp.hasMatch(password);
-  // }
-
-  // bool isSamePassword(String password, String passwordRetype) {
-  //   if (passwordRetype.isEmpty) {
-  //     return false;
-  //   }
-
-  //   return password == passwordRetype;
-  // }
 
   // Function to send verification code to email
   void sendVertCodeToEmail() {
@@ -111,7 +91,7 @@ class _Sign_upScreenState extends ConsumerState<Sign_upScreen> {
       });
     }
   }
-
+  static const SizedBox defaultSpacing = SizedBox(height: 20);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -140,7 +120,7 @@ class _Sign_upScreenState extends ConsumerState<Sign_upScreen> {
               style: TextStyle(fontSize: 24),
             ),
 
-            const SizedBox(height: 20),
+            defaultSpacing,
 
             TextInputBox(
               text: '학교 이메일',
@@ -151,7 +131,7 @@ class _Sign_upScreenState extends ConsumerState<Sign_upScreen> {
               errorMessage: "학교 이메일이 아니거나 존재하지 않는 이메일 입니다",
             ),
 
-            const SizedBox(height: 20),
+            defaultSpacing,
 
             passwordInputBox(
               text: '비밀번호',
@@ -167,7 +147,7 @@ class _Sign_upScreenState extends ConsumerState<Sign_upScreen> {
                   "비밀번호 조건에 부합하지 않습니다\n\n다음 요건을 충족해 주세요\n- 8자 이상\n- 숫자 1개 이상\n- 소문자 1개 이상\n- 대문자 1개 이상\n- 특수문자 1개 이상",
             ),
 
-            const SizedBox(height: 20),
+            defaultSpacing,
             passwordInputBox(
               text: '비밀번호 확인',
               boxWidth: 331,

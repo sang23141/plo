@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:email_vertify/widget/my_widgets.dart';
+import 'package:email_vertify/common/widget/my_widgets.dart';
 
 //프로필 사진 추가 Stateful Stack
 class ProfileStack extends StatefulWidget {

@@ -1,4 +1,4 @@
-import 'package:email_vertify/sign_up_screen.dart';
+import 'package:email_vertify/views/sign_up_screen_view.dart/sign_up_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
