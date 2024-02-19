@@ -18,13 +18,15 @@ class ProfileBG extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: const BoxDecoration(color: Colors.white),
-      child: GestureDetector(
-        onTap: () {
-          FocusScope.of(context).unfocus();
-        },
-        child: const Profile(),
+    return Scaffold(
+      body: Container(
+        decoration: const BoxDecoration(color: Colors.white),
+        child: GestureDetector(
+          onTap: () {
+            FocusScope.of(context).unfocus();
+          },
+          child: const Profile(),
+        ),
       ),
     );
   }
@@ -35,25 +37,27 @@ class Profile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      alignment: Alignment.center,
-      child: const SingleChildScrollView(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            //프로필 사진 추가 Stateful Stack
-            ProfileStack(),
-            //"프로필 설정"
-            Padding(
-              padding: EdgeInsets.only(top: 10.0),
-              child: Text(
-                "프로필 설정",
-                style: TextStyle(fontSize: 20),
+    return Scaffold(
+      body: Container(
+        alignment: Alignment.center,
+        child: const SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              //프로필 사진 추가 Stateful Stack
+              ProfileStack(),
+              //"프로필 설정"
+              Padding(
+                padding: EdgeInsets.only(top: 10.0),
+                child: Text(
+                  "프로필 설정",
+                  style: TextStyle(fontSize: 20),
+                ),
               ),
-            ),
-            //프로필 상세 입력 Stateful TextFormField 및 확인 버튼
-            ProfileForm(),
-          ],
+              //프로필 상세 입력 Stateful TextFormField 및 확인 버튼
+              ProfileForm(),
+            ],
+          ),
         ),
       ),
     );

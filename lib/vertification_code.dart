@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:email_vertify/services/api_service.dart';
 import 'package:email_vertify/common/widget/my_widgets.dart';
+import 'package:email_vertify/views/profile_screen.dart/profile_create.dart';
 import 'package:flutter/material.dart';
 
 class VertCodeScreen extends StatefulWidget {
@@ -71,12 +72,14 @@ class _VertCodeScreenState extends State<VertCodeScreen> {
         setState(() {
           invalidVertCode = false;
         });
+        Navigator.push(context, MaterialPageRoute(builder: (context) => const ProfileBG() ));
         //Write a code to navigate to the next page upon successful verification
         //Navigator.of(context).pushReplacement
       } else {
         setState(() {
           invalidVertCode = true;
         });
+
       }
     });
   }
