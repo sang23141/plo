@@ -23,14 +23,14 @@ class _Sign_upScreenState extends ConsumerState<Sign_upScreen> {
   TextEditingController passwordRetype = TextEditingController();
   TextEditingController email = TextEditingController();
 
-  @override
-  void initState() {
-    super.initState();
-    //Provider wriiten to save state when user goes to next page and come back
-    ref
-        .read(signUpInfoProvider.notifier)
-        .setEmailAndPassword(email, password, passwordRetype);
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   //Provider wriiten to save state when user goes to next page and come back
+  //   ref
+  //       .read(signUpInfoProvider.notifier)
+  //       .setEmailAndPassword(email, password, passwordRetype);
+  // }
 
   @override
   void dispose() {

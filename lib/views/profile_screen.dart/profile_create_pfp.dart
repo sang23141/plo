@@ -42,7 +42,8 @@ class _ProfileStackState extends ConsumerState<ProfileStack> {
         _image = file.readAsBytesSync();
       });
     } else if (result is ErrorReturnType) {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(result.message!)));
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text(result.message!)));
     }
   }
 
@@ -111,7 +112,11 @@ class _ProfileStackState extends ConsumerState<ProfileStack> {
               ),
             ],
             onSelected: (value) {
-              selectImage;
+              if (value == 'photo') {
+                selectImage(ImageSource.camera);
+              } else if (value == 'gallery') {
+                selectImage(ImageSource.gallery);
+              }
             },
           ),
         ),
@@ -119,4 +124,3 @@ class _ProfileStackState extends ConsumerState<ProfileStack> {
     );
   }
 }
-

@@ -8,6 +8,7 @@ import 'package:flutter/services.dart';
 import 'package:email_vertify/common/widget/my_widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'dart:io';
+
 //프로필 상세 입력 Stateful TextFormField 및 확인 버튼
 class ProfileForm extends ConsumerStatefulWidget {
   const ProfileForm({super.key});
@@ -16,16 +17,14 @@ class ProfileForm extends ConsumerStatefulWidget {
   ConsumerState<ProfileForm> createState() => _ProfileFormState();
 }
 
-
 class _ProfileFormState extends ConsumerState<ProfileForm> {
   @override
   void initState() {
     super.initState();
   }
+
   final _formKey = GlobalKey<FormState>();
   final auth = AuthMethods();
-
-  
 
   TextEditingController nickname = TextEditingController();
   TextEditingController grade = TextEditingController();
@@ -68,7 +67,8 @@ class _ProfileFormState extends ConsumerState<ProfileForm> {
                         textFormFieldErr(
                           circularRadius: 9.0,
                           controller: nickname,
-                          validator: (value) =>Validator.validateNickName(value),
+                          validator: (value) =>
+                              Validator.validateNickName(value),
                           textInputAction: TextInputAction.next,
                         ),
                       ],
@@ -177,8 +177,13 @@ class _ProfileFormState extends ConsumerState<ProfileForm> {
                     ),
                     onPressed: () async {
                       if (_formKey.currentState!.validate()) {
-                        String result = await auth.signUpUser(email: email, password: password, nickname: nickname.text, grade: grade.text, major: major.text, file:profilePic);
-                       
+                        String result = await auth.signUpUser(
+                            email: email,
+                            password: password,
+                            nickname: nickname.text,
+                            grade: grade.text,
+                            major: major.text,
+                            file: profilePic);
                       }
                     },
                     child: const Text(
