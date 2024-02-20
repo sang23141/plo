@@ -25,9 +25,9 @@ class ProfileStack extends ConsumerStatefulWidget {
 }
 
 class _ProfileStackState extends ConsumerState<ProfileStack> {
-  Uint8List? _image;
+  File? _image;
 
-  void selectImage(ImageSource source) async {
+  Future<void> selectImage(ImageSource source) async {
     final pickedImage = ref.read(imagePickerRepositoryProvider);
     ReturnType result;
     if (source == ImageSource.camera) {
@@ -39,7 +39,7 @@ class _ProfileStackState extends ConsumerState<ProfileStack> {
       File file = result.data;
       ref.read(selectedFile.notifier).setFile(file);
       setState(() {
-        _image = file.readAsBytesSync();
+        _image = file;
       });
     } else if (result is ErrorReturnType) {
       ScaffoldMessenger.of(context)
@@ -71,7 +71,7 @@ class _ProfileStackState extends ConsumerState<ProfileStack> {
             ? CircleAvatar(
                 radius: 62,
                 backgroundColor: Colors.transparent,
-                backgroundImage: MemoryImage(_image!),
+                backgroundImage: FileImage(_image!),
               )
             : const CircleAvatar(
                 radius: 62,
