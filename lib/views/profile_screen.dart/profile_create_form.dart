@@ -35,7 +35,7 @@ class _ProfileFormState extends ConsumerState<ProfileForm> {
     final signupInfo = ref.watch(signUpInfoProvider);
     final email = signupInfo['email'] ?? '';
     final password = signupInfo['password'] ?? '';
-    File? profilePic = ref.read(selectedFile);
+    File? profilePic = ref.watch(selectedFile);
     return Form(
       key: _formKey,
       child: Column(

@@ -32,9 +32,10 @@ import 'package:flutter/services.dart';
 // for picking up image from camera
 class ImagePickerRepository {
   Future pickImageFromGallery() async {
+    final ImagePicker imagePicker = ImagePicker();
     try {
-      final ImagePicker imagePicker = ImagePicker();
       XFile? file = await imagePicker.pickImage(source: ImageSource.gallery);
+
       if (file != null) {
         final FileCompression = [File(file!.path)];
         await compressImage(FileCompression);
@@ -49,21 +50,21 @@ class ImagePickerRepository {
   }
 
 // for picking up image from gallery
-  Future pickImageFromCamera(ImageSource source) async {
+  Future pickImageFromCamera() async {
     final ImagePicker imagePicker = ImagePicker();
-    try{
-    XFile? file = await imagePicker.pickImage(source: ImageSource.camera);
+    try {
+      XFile? file = await imagePicker.pickImage(source: ImageSource.camera);
 
-    if (file != null) {
-      return SuccessReturnType(isSuccess: true, data: File(file.path));
-    } else {
-      return SuccessReturnType(isSuccess: false);
+      if (file != null) {
+        return SuccessReturnType(isSuccess: true, data: File(file.path));
+      } else {
+        return SuccessReturnType(isSuccess: false);
+      }
+    } on PlatformException catch (error) {
+      return ErrorReturnType(message: "카메라 접근을 허용해주세요", error: error);
+    } catch (error) {
+      return ErrorReturnType(error: error);
     }
-  } on PlatformException catch (error) {
-    return ErrorReturnType(message: "카메라 접근을 허용해주세요", error: error);
-  } catch (error) {
-    return ErrorReturnType(error: error);
-  }
   }
 
   Future<bool> compressImage(List<File> files) async {
