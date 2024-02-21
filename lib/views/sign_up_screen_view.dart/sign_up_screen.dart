@@ -91,6 +91,7 @@ class _Sign_upScreenState extends ConsumerState<Sign_upScreen> {
       });
     }
   }
+
   static const SizedBox defaultSpacing = SizedBox(height: 20);
   @override
   Widget build(BuildContext context) {
