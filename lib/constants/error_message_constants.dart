@@ -4,17 +4,21 @@ class ErrorMessageConstants {
   static const String emailFormatError = "이메일 형식을 올바르게 써주세요";
   static const String emptyStringError = "값을 입력 해주세요";
   static const String passwordFormatError =
-      "비밀번호는 최소 8자 이상이어야 하며, 최소 1개의 글자, 1개의 숫자, 그리고 1개의 특수 문자를 포함해야 합니다";
-  static const String confirmPasswordError = "Password and confirm password must be the same";
+      "비밀번호는 8자 이상이어야 하며\n최소 1개이상의 대문자, 소문자, 숫자,\n특수문자를 포함해야 합니다";
+  static const String confirmPasswordError = "비밀번호가 일치하지 않습니다";
 
-  static const String imageUploadError = "Sorry... There was an error uploading photos. Please try again";
-  static const String itemUploadError = "Sorry... There was an error uploading item. Please try again";
+  static const String imageUploadError =
+      "Sorry... There was an error uploading photos. Please try again";
+  static const String itemUploadError =
+      "Sorry... There was an error uploading item. Please try again";
 
   static const String showItemWarningErrorMessage =
       "This item has been reported multiple times by other users. It could contain inappropriate content. Would you still like to view this item?";
-  static const String failedToLaunchUrlMessage = "Failed to launch url. Please try again later";
+  static const String failedToLaunchUrlMessage =
+      "Failed to launch url. Please try again later";
 
-  static const String needToLoginMessage = "You need to login to use this feature. Please login and try again.";
+  static const String needToLoginMessage =
+      "You need to login to use this feature. Please login and try again.";
   static const String needToLoginForReportMessage =
       "To enhance security measures, we do not permit unsigned users to report a post. Please log in and try again.";
   static const String needToLoginForNotificationSetting =
