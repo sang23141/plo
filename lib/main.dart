@@ -1,4 +1,5 @@
 import 'package:email_vertify/views/sign_up_screen_view.dart/sign_up_screen.dart';
+import 'package:email_vertify/views/Terms_of_service_screen/terms_of_service_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
