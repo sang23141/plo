@@ -31,13 +31,13 @@ class _ProfileStackState extends ConsumerState<ProfileStack> {
     final pickedImage = ref.read(imagePickerRepositoryProvider);
     ReturnType result;
     if (source == ImageSource.camera) {
-      result = await pickedImage.pickImageFromCamera(source);
+      result = await pickedImage.pickImageFromCamera();
     } else {
       result = await pickedImage.pickImageFromGallery();
     }
     if (result is SuccessReturnType && result.data != null) {
       File file = result.data;
-      ref.read(selectedFile.notifier).setFile(file);
+      ref.watch(selectedFile.notifier).setFile(file);
       setState(() {
         _image = file;
       });
