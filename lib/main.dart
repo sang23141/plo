@@ -1,4 +1,8 @@
+import 'package:email_vertify/views/home_screen/home_screen.dart';
+import 'package:email_vertify/views/log_in_screen/log_in_screen.dart';
 import 'package:email_vertify/views/sign_up_screen_view.dart/sign_up_screen.dart';
+import 'package:email_vertify/views/splash_screen/splash_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -9,9 +13,8 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  await FirebaseAppCheck.instance.activate(
-    androidProvider: AndroidProvider.debug
-  );
+  await FirebaseAppCheck.instance
+      .activate(androidProvider: AndroidProvider.debug);
   runApp(
     const ProviderScope(
       child: MyApp(),
@@ -24,8 +27,19 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Sign_upScreen(),
+    return MaterialApp(
+        home: StreamBuilder(
+          stream: FirebaseAuth.instance.authStateChanges(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const SplashScreen();
+            }
+            if (snapshot.hasData) {
+              return signInScreen();
+            }
+            return const Sign_upScreen();
+          },
+        ),
     );
   }
 }
