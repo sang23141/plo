@@ -117,18 +117,3 @@ Future<bool> nameExists(String username) async {
   return data.containsKey(username);
 }
 */
-/*
-//Submit the new user data to Cloud Firestore
-Future profileSubmit(
-    String email, String nickname, int grade, String major) async {
-  final user = {
-    "email": email,
-    "nickname": nickname,
-    "grade": grade,
-    "major": major,
-  };
-  //new document for the user
-  db.collection("users").add(user).then((documentSnapshot) =>
-      print("Added Data with ID: ${documentSnapshot.id}"));
-}
-*/
