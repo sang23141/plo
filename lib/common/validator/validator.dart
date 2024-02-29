@@ -26,7 +26,7 @@ static String? isSamePassword(String? password, String? passwordRetype) {
   if (password == null || password.isEmpty || passwordRetype == null || passwordRetype.isEmpty) {
     return ErrorMessageConstants.emptyStringError;
   }
-  if (password !=passwordRetype) {
+  if (password != passwordRetype) {
     return ErrorMessageConstants.confirmPasswordError;
   }
     else {

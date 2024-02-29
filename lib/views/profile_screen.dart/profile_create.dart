@@ -95,4 +95,39 @@ Future<bool> getMockData() {
 Future<bool> getstatus() async {
   bool message = await getMockData();
   return (message); // will print one on console.
+<<<<<<< HEAD
 }
+=======
+}
+
+/*
+Future<bool> nameExists2(String username) async {
+  // we check first if the username doesn't exists (is not registered)
+  if (!await doesUsernameExistsAlready(username)) {
+    // then, we register it.
+    await FirebaseFirestore.instance
+        .collection("users")
+        .doc("usernames")
+        .set({username: true}, SetOptions(merge: true));
+    return false;
+  } else {
+    // otherwise we print that it exists already
+    print("$username already exists");
+  }
+  return true;
+}
+
+// we check a username existence with this method
+Future<bool> nameExists(String username) async {
+  // we get the registered usernames from our database
+  final usernames = await FirebaseFirestore.instance
+      .collection("users")
+      .doc("usernames")
+      .get();
+  final data = usernames.data() as Map<String, dynamic>;
+
+  // we return that if a key with that username exists
+  return data.containsKey(username);
+}
+*/
+>>>>>>> 132e0defb4d9a7d1028fc846d397b1c93b19332d

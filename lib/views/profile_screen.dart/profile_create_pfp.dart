@@ -24,7 +24,7 @@ class _ProfileStackState extends ConsumerState<ProfileStack> {
     final pickedImage = ref.watch(imagePickerRepositoryProvider);
     ReturnType result;
     if (source == ImageSource.camera) {
-      result = await pickedImage.pickImageFromCamera(source);
+      result = await pickedImage.pickImageFromCamera();
     } else {
       result = await pickedImage.pickImageFromGallery();
     }

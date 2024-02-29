@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-Color PLOShadowColor = const Color.fromARGB(200, 0, 0, 0);
-
 Widget NumInputBox(BuildContext context, TextEditingController textController,
     {bool? wrongInput = false}) {
   return Material(
     elevation: 5,
-    shadowColor: PLOShadowColor,
+    shadowColor: const Color.fromARGB(200, 0, 0, 0),
     child: Container(
-      height: 85,
-      width: 73,
+      width: 75,
       decoration: BoxDecoration(
         border: Border.all(
             width: 1, color: wrongInput! ? Colors.red : Colors.black),
@@ -38,51 +35,34 @@ Widget NumInputBox(BuildContext context, TextEditingController textController,
 }
 
 // commentation needed
-Widget TextInputBox(
+Widget textInputBox(
     {required String text,
-    double? boxWidth = 200,
-    double? boxHeight = 50,
-    double? fontSize = 20,
-    required TextEditingController textController,
-    bool? wrongInput = false,
-    String errorMessage = ""}) {
-  return Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      Text(
-        text,
-        style: const TextStyle(fontSize: 20),
-      ),
-      Material(
-        shadowColor: PLOShadowColor,
-        elevation: 5,
-        child: Container(
-          width: boxWidth,
-          height: boxHeight,
-          decoration: BoxDecoration(
-            border: Border.all(
-                width: 1, color: wrongInput! ? Colors.red : Colors.black),
-            borderRadius: BorderRadius.circular(6),
-          ),
-          child: TextField(
-            controller: textController,
-            keyboardType: TextInputType.emailAddress,
-            style: TextStyle(fontSize: fontSize),
-          ),
-        ),
-      ),
-      Text(
-        wrongInput ? errorMessage : '',
-        style: const TextStyle(color: Colors.red, fontSize: 12),
-      )
-    ],
-  );
+    double fontSize = 20,
+    required TextEditingController controller,
+    required String? Function(String?)? validator}) {
+  return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+    Text(
+      text,
+      style: const TextStyle(fontSize: 20),
+    ),
+    TextFormField(
+        decoration: InputDecoration(
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(6),
+              borderSide: const BorderSide(color: Colors.black, width: 1),
+            ),
+            contentPadding: const EdgeInsets.fromLTRB(5.0, 5.0, 5.0, 5.0)),
+        controller: controller,
+        keyboardType: TextInputType.emailAddress,
+        style: TextStyle(fontSize: fontSize),
+        validator: validator)
+  ]);
 }
 
 Container ButtonBox(
     {required String text,
     Color? color = const Color.fromARGB(255, 204, 231, 255),
-    double? boxWidth = 200,
+    double? boxWidth = 220,
     double? boxHeight = 50,
     Function()? buttonFunc,
     bool? wrongInput = false}) {
@@ -95,14 +75,14 @@ Container ButtonBox(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
         side: const BorderSide(color: Colors.transparent),
         backgroundColor: color,
-        shadowColor: PLOShadowColor,
+        shadowColor: const Color.fromARGB(200, 0, 0, 0),
         elevation: 5,
       ),
       child: Text(
         text,
         style: const TextStyle(
           fontSize: 20,
-          color: Colors.black,
+          color: Color.fromARGB(255, 0, 0, 0),
         ),
       ),
     ),
@@ -131,14 +111,11 @@ Widget alertInputBox(
 
 Widget passwordInputBox(
     {required String text,
-    double? boxWidth = 200,
-    double? boxHeight = 50,
     double? fontSize = 20,
-    required TextEditingController textController,
-    bool? wrongInput = false,
-    String errorMessage = "",
+    required TextEditingController controller,
     required bool passwordVisible,
-    required Function() onPressed}) {
+    required Function() onPressed,
+    required String? Function(String?)? validator}) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
@@ -146,36 +123,23 @@ Widget passwordInputBox(
         text,
         style: const TextStyle(fontSize: 20),
       ),
-      Material(
-        shadowColor: PLOShadowColor,
-        elevation: 5,
-        child: Container(
-          width: boxWidth,
-          height: boxHeight,
-          decoration: BoxDecoration(
-            border: Border.all(
-                width: 1, color: wrongInput! ? Colors.red : Colors.black),
-            borderRadius: BorderRadius.circular(6),
-          ),
-          child: TextField(
-            obscureText: !passwordVisible,
-            controller: textController,
-            keyboardType: TextInputType.visiblePassword,
-            style: TextStyle(fontSize: fontSize),
-            decoration: InputDecoration(
+      TextFormField(
+          obscureText: !passwordVisible,
+          controller: controller,
+          keyboardType: TextInputType.visiblePassword,
+          style: TextStyle(fontSize: fontSize),
+          decoration: InputDecoration(
               suffixIcon: IconButton(
                   icon: Icon(
                     passwordVisible ? Icons.visibility_off : Icons.visibility,
                   ),
                   onPressed: onPressed),
-            ),
-          ),
-        ),
-      ),
-      Text(
-        wrongInput ? errorMessage : '',
-        style: const TextStyle(color: Colors.red, fontSize: 12),
-      )
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(6),
+                borderSide: const BorderSide(color: Colors.black, width: 1),
+              ),
+              contentPadding: const EdgeInsets.fromLTRB(5.0, 5.0, 5.0, 5.0)),
+          validator: validator),
     ],
   );
 }
@@ -239,14 +203,13 @@ Widget shadowBox({
   );
 }
 
-Widget textFormFieldErr({
-  TextInputType? inputType,
-  List<TextInputFormatter>? inputRules,
-  required double circularRadius,
-  required String? Function(String?) validator,
-  TextInputAction? textInputAction,
-  TextEditingController? controller
-}) {
+Widget textFormFieldErr(
+    {TextInputType? inputType,
+    List<TextInputFormatter>? inputRules,
+    required double circularRadius,
+    required String? Function(String?) validator,
+    TextInputAction? textInputAction,
+    TextEditingController? controller}) {
   return TextFormField(
     controller: controller,
     keyboardType: inputType,
