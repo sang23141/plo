@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:email_vertify/model/types/return_type.dart';
 import 'package:email_vertify/repository/image_picker_repository.dart';
-import 'package:email_vertify/views/profile_screen.dart/profile_controller.dart';
+import 'package:email_vertify/views/profile_create_screen/profile_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:email_vertify/common/widget/my_widgets.dart';
