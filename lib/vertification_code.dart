@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:email_vertify/services/api_service.dart';
 import 'package:email_vertify/common/widget/my_widgets.dart';
-import 'package:email_vertify/views/profile_screen.dart/profile_create.dart';
+import 'package:email_vertify/views/profile_create_screen/profile_create.dart';
 import 'package:flutter/material.dart';
 
 class VertCodeScreen extends StatefulWidget {

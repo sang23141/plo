@@ -1,4 +1,4 @@
-import 'package:email_vertify/views/sign_up_screen_view.dart/signup_provider.dart';
+import 'package:email_vertify/views/sign_up_screen_view/signup_provider.dart';
 import 'package:email_vertify/services/api_service.dart';
 import 'package:email_vertify/vertification_code.dart';
 import 'package:email_vertify/common/widget/my_widgets.dart';

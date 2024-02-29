@@ -3,7 +3,7 @@ import 'package:email_vertify/views/Terms_of_service_screen/term1.dart';
 import 'package:email_vertify/views/Terms_of_service_screen/term2.dart';
 import 'package:email_vertify/views/Terms_of_service_screen/term3.dart';
 import 'package:email_vertify/views/Terms_of_service_screen/terms_provider.dart';
-import 'package:email_vertify/views/profile_screen.dart/profile_create.dart';
+import 'package:email_vertify/views/profile_create_screen/profile_create.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

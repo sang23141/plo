@@ -3,7 +3,7 @@ import 'package:email_vertify/views/forgot_password/forgot_password_screen.dart'
 import 'package:email_vertify/views/home_screen/home_screen.dart';
 import 'package:email_vertify/views/log_in_screen/log_in_controller.dart';
 import 'package:email_vertify/views/log_in_screen/widgets/log_in_textfield.dart';
-import 'package:email_vertify/views/sign_up_screen.dart';
+import 'package:email_vertify/views/sign_up_screen_view/sign_up_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -58,9 +58,7 @@ class _signInScreenState extends ConsumerState<signInScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("People Link One")
-      ),
+      appBar: AppBar(title: const Text("People Link One")),
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.all(20),
@@ -126,7 +124,7 @@ class _signInScreenState extends ConsumerState<signInScreen> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const Sign_upScreen()),
+                            builder: (context) => const SignUpScreen()),
                       );
                     },
                     child: Text("Sign-Up"),
