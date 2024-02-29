@@ -1,5 +1,6 @@
 import 'package:email_vertify/common/validator/validator.dart';
 import 'package:email_vertify/repository/auth_repository.dart';
+import 'package:email_vertify/views/log_in_screen/log_in_screen.dart';
 import 'package:email_vertify/views/profile_screen.dart/profile_controller.dart';
 import 'package:email_vertify/views/sign_up_screen_view.dart/signup_provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -185,6 +186,12 @@ class _ProfileFormState extends ConsumerState<ProfileForm> {
                             major: major.text,
                             file: profilePic);
                       }
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const signInScreen(),
+                        ),
+                      );
                     },
                     child: const Text(
                       '확인',

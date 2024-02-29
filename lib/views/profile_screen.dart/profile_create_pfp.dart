@@ -9,13 +9,6 @@ import 'package:email_vertify/common/widget/my_widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 
-//프로필 사진 추가 Stateful Stack
-// class SeletedFileNotifier extends StateNotifier<File?> {
-//   SelectedFileNotifier() : super(null);
-//   void setFile(File? file) {
-//     state = file;
-//   }
-// }
 
 class ProfileStack extends ConsumerStatefulWidget {
   const ProfileStack({super.key});
@@ -25,10 +18,10 @@ class ProfileStack extends ConsumerStatefulWidget {
 }
 
 class _ProfileStackState extends ConsumerState<ProfileStack> {
-  Uint8List? _image;
+  File? _image;
 
-  void selectImage(ImageSource source) async {
-    final pickedImage = ref.read(imagePickerRepositoryProvider);
+  Future<void> selectImage(ImageSource source) async {
+    final pickedImage = ref.watch(imagePickerRepositoryProvider);
     ReturnType result;
     if (source == ImageSource.camera) {
       result = await pickedImage.pickImageFromCamera();
@@ -39,30 +32,13 @@ class _ProfileStackState extends ConsumerState<ProfileStack> {
       File file = result.data;
       ref.watch(selectedFile.notifier).setFile(file);
       setState(() {
-        _image = file.readAsBytesSync();
+        _image = file;
       });
     } else if (result is ErrorReturnType) {
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text(result.message!)));
     }
   }
-
-  /*
-  void captureImage() async {
-    Uint8List img = await pickImage(ImageSource.camera);
-    setState(() {
-      _image = img;
-    });
-  }
-
-  void selectImage() async {
-    Uint8List img = await pickImage(ImageSource.gallery);
-    setState(() {
-      _image = img;
-    });
-  }
-  */
-
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -71,7 +47,7 @@ class _ProfileStackState extends ConsumerState<ProfileStack> {
             ? CircleAvatar(
                 radius: 62,
                 backgroundColor: Colors.transparent,
-                backgroundImage: MemoryImage(_image!),
+                backgroundImage: FileImage(_image!),
               )
             : const CircleAvatar(
                 radius: 62,

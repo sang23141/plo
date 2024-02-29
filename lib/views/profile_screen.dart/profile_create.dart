@@ -38,6 +38,16 @@ class Profile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        leading: BackButton(
+          color: const Color(0xFF000000),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+      ),
       body: Container(
         alignment: Alignment.center,
         child: const SingleChildScrollView(
@@ -85,6 +95,9 @@ Future<bool> getMockData() {
 Future<bool> getstatus() async {
   bool message = await getMockData();
   return (message); // will print one on console.
+<<<<<<< HEAD
+}
+=======
 }
 
 /*
@@ -117,3 +130,4 @@ Future<bool> nameExists(String username) async {
   return data.containsKey(username);
 }
 */
+>>>>>>> 132e0defb4d9a7d1028fc846d397b1c93b19332d
