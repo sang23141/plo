@@ -1,0 +1,66 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:email_vertify/common/utils/log_util.dart';
+import 'package:email_vertify/constants/firebase_contants.dart';
+import 'package:email_vertify/model/post_model.dart';
+import 'package:email_vertify/model/types/category_type.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+class FirebasePostRepository {
+  final Ref ref;
+  FirebasePostRepository(this.ref);
+  final firestoreinstance = FirebaseFirestore.instance;
+
+  void _logHelper (String typeofAction, String functionName) {
+    logToConsole("Firestore was used $typeofAction in $functionName in FirebasePostRepository");
+  }
+
+  Future<bool> uploadPostFirebase (PostModel postModel, bool isforEdit) async {
+    try {
+      if (isforEdit) {
+        await firestoreinstance
+        .collection(FirebaseConstants.postcollectionName)
+        .doc(postModel.pid)
+        .update(postModel.toJson());        
+      } else {
+        await firestoreinstance.collection(FirebaseConstants.postcollectionName).doc(postModel.pid).set(postModel.toJson());
+      }
+      return true;
+    } catch (error) {
+      logToConsole("UploadPostModelrror : error ${error.toString()}");
+      return false;
+    }
+  }
+  Future<List<PostModel>?> fetchPost({Timestamp? lastPostUploadTime = null, int amountFetch = 10}) async {
+    try {
+      final QuerySnapshot querySnapshot;
+
+      if ( lastPostUploadTime == null) {
+        querySnapshot = await FirebaseFirestore.instance
+        .collection(FirebaseConstants.postcollectionName)
+        .where(PostModelFieldNameConstants.category,
+        whereIn: [CategoryType.information.toString()])
+        .orderBy(PostModelFieldNameConstants.uploadTime, descending: true)
+        .limit(amountFetch)
+        .get();
+      }
+      else {
+        querySnapshot = await FirebaseFirestore.instance
+        .collection(FirebaseConstants.postcollectionName)
+        .where(PostModelFieldNameConstants.category, whereIn: [CategoryType.general.toString()])
+        .orderBy(PostModelFieldNameConstants.uploadTime, descending: true)
+        .limit(amountFetch)
+        .get();
+      }
+
+      final List<PostModel> fetchedPosts = [];
+      for (int i = 0; i < querySnapshot.size; i++) {
+        final post = PostModel().fromJson(querySnapshot.docs[i].data() as Map<String, dynamic>);
+        if (post != null) fetchedPosts.add(post);
+      }
+      return fetchedPosts;
+    } catch (error) {
+      return null;
+    }
+  }
+}
