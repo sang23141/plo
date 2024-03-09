@@ -2,7 +2,7 @@ import 'package:email_vertify/common/validator/validator.dart';
 import 'package:email_vertify/repository/auth_repository.dart';
 import 'package:email_vertify/views/log_in_screen/log_in_screen.dart';
 import 'package:email_vertify/views/profile_create_screen/profile_controller.dart';
-import 'package:email_vertify/views/sign_up_screen_view/signup_provider.dart';
+import 'package:email_vertify/views/sign_up_screen_view/provider/signup_provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

@@ -3,6 +3,7 @@ import 'package:email_vertify/views/forgot_password/forgot_password_screen.dart'
 import 'package:email_vertify/views/home_screen/home_screen.dart';
 import 'package:email_vertify/views/log_in_screen/log_in_controller.dart';
 import 'package:email_vertify/views/log_in_screen/widgets/log_in_textfield.dart';
+import 'package:email_vertify/views/settings_screen/settings_screen.dart';
 import 'package:email_vertify/views/sign_up_screen_view/sign_up_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -104,7 +105,7 @@ class _signInScreenState extends ConsumerState<signInScreen> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const HomeScreen(),
+                            builder: (context) => const SettingsScreen()//HomeScreen(),
                           ),
                         );
                       } else {

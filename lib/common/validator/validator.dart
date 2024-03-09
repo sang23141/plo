@@ -16,44 +16,52 @@ class Validator {
     if (password == null || password.isEmpty) {
       return ErrorMessageConstants.emptyStringError;
     }
-    if (RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$').stringMatch(password) == null) {
+    if (RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$')
+            .stringMatch(password) ==
+        null) {
       return ErrorMessageConstants.passwordFormatError;
     } else {
       return null;
     }
   }
-static String? isSamePassword(String? password, String? passwordRetype) {
-  if (password == null || password.isEmpty || passwordRetype == null || passwordRetype.isEmpty) {
-    return ErrorMessageConstants.emptyStringError;
-  }
-  if (password != passwordRetype) {
-    return ErrorMessageConstants.confirmPasswordError;
-  }
-    else {
+
+  static String? isSamePassword(String? password, String? passwordRetype) {
+    if (password == null ||
+        password.isEmpty ||
+        passwordRetype == null ||
+        passwordRetype.isEmpty) {
+      return ErrorMessageConstants.emptyStringError;
+    }
+    if (password != passwordRetype) {
+      return ErrorMessageConstants.confirmPasswordError;
+    } else {
       return null;
     }
   }
+
   static String? validateNickName(String? nickname) {
     if (nickname == null || nickname.isEmpty) {
       return ErrorMessageConstants.emptyStringError;
-    }
-    else {
+    } else {
       return null;
     }
   }
+
   static String? validateGrade(String? grade) {
     if (grade == null || grade.isEmpty) {
       return ErrorMessageConstants.emptyStringError;
     }
-    else {
+    if (RegExp(r'[0-6]').stringMatch(grade) == null) {
+      return ErrorMessageConstants.wrongInputError;
+    } else {
       return null;
     }
   }
+
   static String? validateMajor(String? major) {
     if (major == null || major.isEmpty) {
       return ErrorMessageConstants.emptyStringError;
-    }
-    else {
+    } else {
       return null;
     }
   }

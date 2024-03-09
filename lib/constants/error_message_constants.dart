@@ -7,6 +7,8 @@ class ErrorMessageConstants {
       "비밀번호는 8자 이상이어야 하며\n최소 1개이상의 대문자, 소문자, 숫자,\n특수문자를 포함해야 합니다";
   static const String confirmPasswordError = "비밀번호가 일치하지 않습니다";
 
+  static const String wrongInputError = "잘못된 값입니다";
+
   static const String imageUploadError =
       "Sorry... There was an error uploading photos. Please try again";
   static const String itemUploadError =
