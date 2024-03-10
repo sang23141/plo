@@ -12,10 +12,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 
-//firebase backend
-//final db = FirebaseFirestore.instance;
-//var usernamesDocRef = db.collection("users").doc("usernames");
-
 class ProfileCreate extends ConsumerStatefulWidget {
   const ProfileCreate({super.key});
 
