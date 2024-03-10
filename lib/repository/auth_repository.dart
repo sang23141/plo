@@ -10,7 +10,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-
 class AuthMethods {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -25,50 +24,69 @@ class AuthMethods {
   }) async {
     String res = "Some error occured";
     try {
-      if (email.isNotEmpty || password.isNotEmpty ||nickname.isNotEmpty ||grade.isNotEmpty ||major.isNotEmpty || file != null) {
-        UserCredential cred = await  _auth.createUserWithEmailAndPassword(email: email, password: password);
-        
-        String photoUrl = await StorageMethods().uploadImageToStorage('profilePics', file!, false);
+      if (email.isNotEmpty ||
+          password.isNotEmpty ||
+          nickname.isNotEmpty ||
+          grade.isNotEmpty ||
+          major.isNotEmpty ||
+          file != null) {
+        UserCredential cred = await _auth.createUserWithEmailAndPassword(
+            email: email, password: password);
+
+        String photoUrl = await StorageMethods()
+            .uploadImageToStorage('profilePics', file!, false);
         //이런 방식으로 하면 doc uid가 자동으로 auth uid로 생성이 됨
         _firestore.collection('users').doc(cred.user!.uid).set({
-          'grade' : grade,
-          'major' : major,
+          'grade': grade,
+          'major': major,
           'nickname': nickname,
           'user_pfp': photoUrl,
-
         });
 
         res = 'success';
       }
-      
-      
-    } 
-    catch (err) {
+    } catch (err) {
       res = err.toString();
-      
     }
     return res;
   }
-  Future<String> signiInUserWithEmail(String email, String password)  async {
+
+  Future<String> signiInUserWithEmail(String email, String password) async {
     try {
       await _auth.signInWithEmailAndPassword(email: email, password: password);
       return ReturnTypeENUM.success.toString();
-    }
-    on FirebaseAuthException catch (error) {
+    } on FirebaseAuthException catch (error) {
       String errorText = ErrorHandlerFunction().signInErrorToString(error);
       return errorText.toString();
-    }
-    catch (error) {
+    } catch (error) {
       logToConsole("Error ${error.toString()} in SignInUserWithEmail");
       return error.toString();
     }
   }
+
   Future<String> sendPasswordEmail(String email) async {
     try {
       await _auth.sendPasswordResetEmail(email: email);
       return ReturnTypeENUM.success.toString();
     } catch (error) {
       return error.toString();
+    }
+  }
+
+  Future<void> signOut() async {
+    await _auth.signOut();
+  }
+
+  Future<String> deleteUserAccount() async {
+    try {
+      await FirebaseAuth.instance.currentUser!.delete();
+      return ReturnTypeENUM.success.toString();
+    } on FirebaseAuthException catch (error) {
+      return error.toString();
+    } catch (error) {
+      return error.toString();
+
+      // Handle general exception
     }
   }
 }
