@@ -1,5 +1,3 @@
-import 'package:algoliasearch/algoliasearch.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class SearchPostsController extends StateNotifier<AsyncValue<void>> {
