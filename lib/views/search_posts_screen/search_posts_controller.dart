@@ -11,8 +11,8 @@ class SearchPostsController extends StateNotifier<AsyncValue<void>> {
 
   _init() async {
     state = const AsyncLoading();
-    final searchHistory = await ref.watch(sharedPreferenceRepositoryProvider).loadSearchHistory();
-    if (searchHistory != null) ref.read(searchHistoryListProvider.notifier).setList(searchHistory);
+    //final searchHistory = await ref.watch(sharedPreferenceRepositoryProvider).loadSearchHistory();
+    //if (searchHistory != null) ref.read(searchHistoryListProvider.notifier).setList(searchHistory);
     state = const AsyncData(null);
   }
 }
@@ -21,7 +21,7 @@ final searchItemsControllerProvider =
     StateNotifierProvider.autoDispose<SearchPostsController, AsyncValue<void>>(
         (ref) {
   ref.onDispose(() {
-    log("SearchItemsController disposed");
+    //log("SearchItemsController disposed");
   });
   return SearchPostsController(ref);
 });

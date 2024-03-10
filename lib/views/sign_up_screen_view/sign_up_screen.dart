@@ -1,4 +1,4 @@
-import 'package:email_vertify/views/sign_up_screen_view/signup_provider.dart';
+import 'package:email_vertify/views/sign_up_screen_view/provider/signup_provider.dart';
 import 'package:email_vertify/services/api_service.dart';
 import 'package:email_vertify/vertification_code.dart';
 import 'package:email_vertify/common/widget/my_widgets.dart';
@@ -70,82 +70,86 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
   static const SizedBox defaultSpacing = SizedBox(height: 20);
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        leading: BackButton(
-          color: const Color(0xFF000000),
-          onPressed: () {
-            Navigator.pop(context);
-          },
+    return GestureDetector(
+      onTap: () {
+        FocusManager.instance.primaryFocus?.unfocus();
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          leading: BackButton(
+            color: const Color(0xFF000000),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
         ),
-      ),
-      body: SingleChildScrollView(
-        child: Align(
-          alignment: Alignment.center,
+        body: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.all(40.0),
+            padding: const EdgeInsets.fromLTRB(40, 0, 40, 0),
             child: Form(
               key: _formKey,
-              child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    //나중에 plo로고로 대체해야 합니다.
-                    const Icon(
-                      Icons.person,
-                      size: 80,
-                    ),
+              child: Center(
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      //나중에 plo로고로 대체해야 합니다.
+                      const Icon(
+                        Icons.person,
+                        size: 80,
+                      ),
 
-                    const Text(
-                      '회원가입',
-                      style: TextStyle(fontSize: 24),
-                    ),
+                      const Text(
+                        '회원가입',
+                        style: TextStyle(fontSize: 24),
+                      ),
 
-                    defaultSpacing,
+                      defaultSpacing,
 
-                    textInputBox(
-                        text: '학교 이메일',
-                        controller: _email,
+                      textInputBox(
+                          text: '학교 이메일',
+                          controller: _email,
+                          validator: (value) =>
+                              Validator.validatePSUEmail(value)),
+
+                      defaultSpacing,
+
+                      passwordInputBox(
+                        text: '비밀번호',
+                        controller: _password,
+                        passwordVisible: _isPasswordVisible,
+                        onPressed: () => setState(() {
+                          _isPasswordVisible = !_isPasswordVisible;
+                        }),
+                        validator: (value) => Validator.validatePassword(value),
+                      ),
+
+                      defaultSpacing,
+
+                      passwordInputBox(
+                        text: '비밀번호 확인',
+                        controller: _passwordRetype,
+                        passwordVisible: _isPasswordVisible,
+                        onPressed: () => setState(() {
+                          _isPasswordVisible = !_isPasswordVisible;
+                        }),
                         validator: (value) =>
-                            Validator.validatePSUEmail(value)),
+                            Validator.isSamePassword(value, _password.text),
+                      ),
 
-                    defaultSpacing,
+                      const SizedBox(height: 90),
+                      _isLoading
+                          ? const CircularProgressIndicator()
+                          : ButtonBox(
+                              text: '인증번호 보내기',
+                              boxWidth: 190,
+                              boxHeight: 60,
+                              buttonFunc: sendVertCodeToEmail),
 
-                    passwordInputBox(
-                      text: '비밀번호',
-                      controller: _password,
-                      passwordVisible: _isPasswordVisible,
-                      onPressed: () => setState(() {
-                        _isPasswordVisible = !_isPasswordVisible;
-                      }),
-                      validator: (value) => Validator.validatePassword(value),
-                    ),
-
-                    defaultSpacing,
-
-                    passwordInputBox(
-                      text: '비밀번호 확인',
-                      controller: _passwordRetype,
-                      passwordVisible: _isPasswordVisible,
-                      onPressed: () => setState(() {
-                        _isPasswordVisible = !_isPasswordVisible;
-                      }),
-                      validator: (value) =>
-                          Validator.isSamePassword(value, _password.text),
-                    ),
-
-                    const SizedBox(height: 90),
-                    _isLoading
-                        ? const CircularProgressIndicator()
-                        : ButtonBox(
-                            text: '인증번호 보내기',
-                            boxWidth: 190,
-                            boxHeight: 60,
-                            buttonFunc: sendVertCodeToEmail),
-
-                    const SizedBox(height: 30),
-                  ]),
+                      const SizedBox(height: 30),
+                    ]),
+              ),
             ),
           ),
         ),

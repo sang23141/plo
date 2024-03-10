@@ -6,8 +6,7 @@ import 'package:email_vertify/repository/auth_repository.dart';
 import 'package:email_vertify/repository/image_picker_repository.dart';
 import 'package:email_vertify/views/log_in_screen/log_in_screen.dart';
 import 'package:email_vertify/views/profile_create_screen/profile_create_controller.dart';
-import 'package:email_vertify/views/sign_up_screen_view/signup_provider.dart';
-//import 'package:firebase_auth/firebase_auth.dart';
+import 'package:email_vertify/views/sign_up_screen_view/provider/signup_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -232,25 +231,3 @@ class _ProfileState extends ConsumerState<ProfileCreate> {
   }
 }
 
-/*
-//닉네임 duplicate checking
-Future<bool> nameExists(String username) async {
-  final QuerySnapshot query =
-      await db.collection("users").where("nickname", isEqualTo: username).get();
-  final List<DocumentSnapshot> docs = query.docs;
-  return docs.length == 1;
-}
-*/
-void main() async {
-  bool c = await getstatus();
-  print(c);
-}
-
-Future<bool> getMockData() {
-  return Future.value(false);
-}
-
-Future<bool> getstatus() async {
-  bool message = await getMockData();
-  return (message); // will print one on console.
-}

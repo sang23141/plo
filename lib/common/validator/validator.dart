@@ -56,6 +56,9 @@ class Validator {
   static String? validateGrade(String? grade) {
     if (grade == null || grade.isEmpty) {
       return ErrorMessageConstants.emptyStringError;
+    }
+    if (RegExp(r'[0-6]').stringMatch(grade) == null) {
+      return ErrorMessageConstants.wrongInputError;
     } else {
       return null;
     }

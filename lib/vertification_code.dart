@@ -108,101 +108,106 @@ class _VertCodeScreenState extends State<VertCodeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        leading: BackButton(
-          color: const Color(0xFF000000),
-          onPressed: () {
-            Navigator.pop(context);
-          },
+    return GestureDetector(
+      onTap: () {
+        FocusManager.instance.primaryFocus?.unfocus();
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          leading: BackButton(
+            color: const Color(0xFF000000),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
         ),
-      ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: Column(
-            children: [
-              //나중에 plo로고로 대체해야 합니다.
-              const Icon(
-                Icons.person,
-                size: 80,
-              ),
-              const Text(
-                '학교인증',
-                style: TextStyle(fontSize: 24),
-              ),
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Column(
+              children: [
+                //나중에 plo로고로 대체해야 합니다.
+                const Icon(
+                  Icons.person,
+                  size: 80,
+                ),
+                const Text(
+                  '학교인증',
+                  style: TextStyle(fontSize: 24),
+                ),
 
-              const SizedBox(height: 30),
-              Row(
-                children: [
-                  const Text(
-                    '인증번호',
-                    style: TextStyle(fontSize: 20),
-                  ),
-                  if (resendTime >= 0)
-                    Text(
-                      convSecToMin(resendTime),
-                      style: const TextStyle(
-                        color: Color(0xFF3A6DF2),
-                        fontSize: 16,
-                      ),
-                    )
-                ],
-              ),
-              const SizedBox(height: 5),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  NumInputBox(context, txt1, wrongInput: invalidVertCode),
-                  NumInputBox(context, txt2, wrongInput: invalidVertCode),
-                  NumInputBox(context, txt3, wrongInput: invalidVertCode),
-                  NumInputBox(context, txt4, wrongInput: invalidVertCode),
-                ],
-              ),
-              const SizedBox(height: 30),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  if (resendTime != 0)
-                    Text(
-                      invalidVertCode ? "인증번호가 일치하지 않습니다" : '',
-                      style: const TextStyle(fontSize: 16, color: Colors.red),
-                    ),
-                  if (resendTime == 0)
+                const SizedBox(height: 30),
+                Row(
+                  children: [
                     const Text(
-                      "시간이 초과되었습니다",
-                      style: TextStyle(fontSize: 16, color: Colors.red),
+                      '인증번호',
+                      style: TextStyle(fontSize: 20),
                     ),
-                  InkWell(
-                    onTap: () {
-                      //resend opt code
-                      invalidVertCode = false;
-                      if (countdownTimer.isActive) {
-                        stopTimer();
-                      }
-                      resendTime = 180; //set to 3 mins
-                      startTimer();
-                      resendVertCode();
-                    },
-                    child: const Text(
-                      '다시 요청',
-                      style: TextStyle(
+                    if (resendTime >= 0)
+                      Text(
+                        convSecToMin(resendTime),
+                        style: const TextStyle(
                           color: Color(0xFF3A6DF2),
-                          fontSize: 17,
-                          decoration: TextDecoration.underline),
+                          fontSize: 16,
+                        ),
+                      )
+                  ],
+                ),
+                const SizedBox(height: 5),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    NumInputBox(context, txt1, wrongInput: invalidVertCode),
+                    NumInputBox(context, txt2, wrongInput: invalidVertCode),
+                    NumInputBox(context, txt3, wrongInput: invalidVertCode),
+                    NumInputBox(context, txt4, wrongInput: invalidVertCode),
+                  ],
+                ),
+                const SizedBox(height: 30),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    if (resendTime != 0)
+                      Text(
+                        invalidVertCode ? "인증번호가 일치하지 않습니다" : '',
+                        style: const TextStyle(fontSize: 16, color: Colors.red),
+                      ),
+                    if (resendTime == 0)
+                      const Text(
+                        "시간이 초과되었습니다",
+                        style: TextStyle(fontSize: 16, color: Colors.red),
+                      ),
+                    InkWell(
+                      onTap: () {
+                        //resend opt code
+                        invalidVertCode = false;
+                        if (countdownTimer.isActive) {
+                          stopTimer();
+                        }
+                        resendTime = 180; //set to 3 mins
+                        startTimer();
+                        resendVertCode();
+                      },
+                      child: const Text(
+                        '다시 요청',
+                        style: TextStyle(
+                            color: Color(0xFF3A6DF2),
+                            fontSize: 17,
+                            decoration: TextDecoration.underline),
+                      ),
                     ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 90),
-              ButtonBox(
-                  text: '인증 완료',
-                  boxWidth: 160,
-                  boxHeight: 61,
-                  buttonFunc: verifyVertCode)
-            ],
+                  ],
+                ),
+                const SizedBox(height: 90),
+                ButtonBox(
+                    text: '인증 완료',
+                    boxWidth: 160,
+                    boxHeight: 61,
+                    buttonFunc: verifyVertCode)
+              ],
+            ),
           ),
         ),
       ),
