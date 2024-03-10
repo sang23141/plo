@@ -25,4 +25,6 @@ class ErrorMessageConstants {
       "We do not send notifications to unsigned users. To utilize this feature, please log in and try again.";
   static const String proceedWithoutLoginWarningMessage = '''
 If you choose to continue without logging in, please be aware that you will not have access to the full range of exclusive features we offer. Would you like to proceed regardless?''';
+  static const String duplicateNicknameMessage =
+      "해당 닉네임은 중복입니다. 다른 닉네임을 사용해주세요.";
 }

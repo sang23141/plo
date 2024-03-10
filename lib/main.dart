@@ -1,4 +1,5 @@
 import 'package:email_vertify/views/log_in_screen/log_in_screen.dart';
+import 'package:email_vertify/views/profile_create_screen/profile_create.dart';
 import 'package:email_vertify/views/sign_up_screen_view/sign_up_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -34,9 +35,9 @@ class MyApp extends StatelessWidget {
             return const SplashScreen();
           }
           if (snapshot.hasData) {
-            return signInScreen();
+            return const ProfileCreate();
           }
-          return const SignUpScreen();
+          return const ProfileCreate();
         },
       ),
     );

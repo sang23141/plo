@@ -27,7 +27,7 @@ class _TermsOfServiceScreenState extends ConsumerState<TermsOfServiceScreen> {
       Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => const ProfileBG(),
+            builder: (context) => const ProfileCreate(),
           ));
     } else {
       ref

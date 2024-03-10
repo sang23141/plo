@@ -1,4 +1,5 @@
 import 'package:email_vertify/constants/error_message_constants.dart';
+import 'package:email_vertify/views/profile_create_screen/profile_create_controller.dart';
 
 class Validator {
   static String? validatePSUEmail(String? email) {
@@ -16,44 +17,54 @@ class Validator {
     if (password == null || password.isEmpty) {
       return ErrorMessageConstants.emptyStringError;
     }
-    if (RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$').stringMatch(password) == null) {
+    if (RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$')
+            .stringMatch(password) ==
+        null) {
       return ErrorMessageConstants.passwordFormatError;
     } else {
       return null;
     }
   }
-static String? isSamePassword(String? password, String? passwordRetype) {
-  if (password == null || password.isEmpty || passwordRetype == null || passwordRetype.isEmpty) {
-    return ErrorMessageConstants.emptyStringError;
-  }
-  if (password != passwordRetype) {
-    return ErrorMessageConstants.confirmPasswordError;
-  }
-    else {
-      return null;
-    }
-  }
-  static String? validateNickName(String? nickname) {
-    if (nickname == null || nickname.isEmpty) {
+
+  static String? isSamePassword(String? password, String? passwordRetype) {
+    if (password == null ||
+        password.isEmpty ||
+        passwordRetype == null ||
+        passwordRetype.isEmpty) {
       return ErrorMessageConstants.emptyStringError;
     }
-    else {
+    if (password != passwordRetype) {
+      return ErrorMessageConstants.confirmPasswordError;
+    } else {
       return null;
     }
   }
+
+  static String? validateNickName(String? nickname) {
+    SelectedFileNotifier pfpCtrler = SelectedFileNotifier();
+
+    if (nickname == null || nickname.isEmpty) {
+      return ErrorMessageConstants.emptyStringError;
+    } else if (pfpCtrler.checkDuplicate(nickname) as bool == false) {
+      print('duplicate nickname');
+      return ErrorMessageConstants.duplicateNicknameMessage;
+    } else {
+      return null;
+    }
+  }
+
   static String? validateGrade(String? grade) {
     if (grade == null || grade.isEmpty) {
       return ErrorMessageConstants.emptyStringError;
-    }
-    else {
+    } else {
       return null;
     }
   }
+
   static String? validateMajor(String? major) {
     if (major == null || major.isEmpty) {
       return ErrorMessageConstants.emptyStringError;
-    }
-    else {
+    } else {
       return null;
     }
   }

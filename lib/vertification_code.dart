@@ -79,8 +79,12 @@ class _VertCodeScreenState extends State<VertCodeScreen> {
         setState(() {
           invalidVertCode = false;
         });
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => const ProfileBG()));
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const ProfileCreate(),
+          ),
+        );
       } else {
         setState(() {
           invalidVertCode = true;

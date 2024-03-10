@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -148,7 +150,7 @@ PopupMenuItem<Object> dropMenuItem({
   required dynamic val,
   Widget? iconData,
   required String text,
-  required double textFontSize,
+  double? textFontSize = 15,
 }) {
   return PopupMenuItem(
     value: val,
@@ -203,13 +205,52 @@ Widget shadowBox({
   );
 }
 
-Widget textFormFieldErr(
-    {TextInputType? inputType,
-    List<TextInputFormatter>? inputRules,
-    required double circularRadius,
-    required String? Function(String?) validator,
-    TextInputAction? textInputAction,
-    TextEditingController? controller}) {
+Widget pfpStack({
+  required File? pfpImage,
+  required ImageProvider<Object>? bgImage,
+  required List<PopupMenuEntry<dynamic>> Function(BuildContext) items,
+  required Function(dynamic) onSelected,
+}) {
+  return Stack(
+    children: [
+      pfpImage != null
+          ? CircleAvatar(
+              radius: 62,
+              backgroundColor: Colors.transparent,
+              backgroundImage: FileImage(pfpImage),
+            )
+          : CircleAvatar(
+              radius: 62,
+              backgroundColor: Colors.transparent,
+              backgroundImage: bgImage,
+            ),
+      Positioned(
+        right: -1,
+        bottom: 0,
+        child: PopupMenuButton(
+          itemBuilder: items,
+          onSelected: onSelected,
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(100),
+            child: Image.asset(
+              "assets/images/profile_plus.png",
+              width: 42.5,
+            ),
+          ),
+        ),
+      ),
+    ],
+  );
+}
+
+Widget textFormFieldErr({
+  TextInputType? inputType,
+  List<TextInputFormatter>? inputRules,
+  required double circularRadius,
+  required String? Function(String?) validator,
+  TextInputAction? textInputAction,
+  TextEditingController? controller,
+}) {
   return TextFormField(
     controller: controller,
     keyboardType: inputType,
@@ -244,11 +285,96 @@ Widget textFormFieldErr(
       ),
     ),
     validator: validator,
-    /*
-    text == null | text.isEmpty
-        ? "닉네임을 입력해주세요"
-        : (nameExists(text) ? "이미 존재하는 닉네임입니다" : null),
-    */
     textInputAction: textInputAction,
+  );
+}
+
+Widget textFormFieldErrWithShadow({
+  required String? textAbove,
+  double? width = 300,
+  double? height = 55,
+  double? radius = 9.0,
+  required Offset shadowOffset,
+  TextEditingController? controller,
+  List<TextInputFormatter>? inputRules,
+  required String? Function(String?) validator,
+  TextInputAction? textInputAction = TextInputAction.next,
+}) {
+  return Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      Padding(
+        padding: const EdgeInsets.only(top: 20.0),
+        child: Text(
+          textAbove!,
+          style: const TextStyle(
+            fontSize: 20,
+          ),
+        ),
+      ),
+      Stack(
+        children: [
+          shadowBox(
+            width: width!,
+            height: height!,
+            circularRadius: radius!,
+            offset: shadowOffset,
+          ),
+          textFormFieldErr(
+            circularRadius: radius,
+            controller: controller,
+            inputRules: inputRules,
+            validator: validator,
+            textInputAction: textInputAction,
+          ),
+        ],
+      ),
+    ],
+  );
+}
+
+Widget sizedButtonWithShadow({
+  double? width = 300,
+  double? height = 55,
+  double? radius = 9.0,
+  required Offset shadowOffset,
+  required void Function()? onPressed,
+  required String buttonText,
+  //cum cum cum
+}) {
+  return Stack(
+    children: [
+      shadowBox(
+        width: width!,
+        height: height!,
+        circularRadius: radius!,
+        offset: shadowOffset,
+      ),
+      SizedBox(
+        width: width,
+        height: height,
+        child: ElevatedButton(
+          style: ButtonStyle(
+            elevation: MaterialStateProperty.all(0),
+            backgroundColor: MaterialStateProperty.all(
+              const Color(0xFFCCE7FF),
+            ),
+            shape: MaterialStateProperty.all(
+              RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20.0),
+              ),
+            ),
+          ),
+          onPressed: onPressed,
+          child: Text(
+            buttonText,
+            style: const TextStyle(
+              fontSize: 20.0,
+              color: Colors.black,
+            ),
+          ),
+        ),
+      )
+    ],
   );
 }
