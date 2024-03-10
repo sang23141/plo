@@ -1,4 +1,5 @@
 import 'package:email_vertify/constants/error_message_constants.dart';
+import 'package:email_vertify/views/profile_create_screen/profile_create_controller.dart';
 
 class Validator {
   static String? validatePSUEmail(String? email) {
@@ -40,8 +41,13 @@ class Validator {
   }
 
   static String? validateNickName(String? nickname) {
+    SelectedFileNotifier pfpCtrler = SelectedFileNotifier();
+
     if (nickname == null || nickname.isEmpty) {
       return ErrorMessageConstants.emptyStringError;
+    } else if (pfpCtrler.checkDuplicate(nickname) as bool == false) {
+      print('duplicate nickname');
+      return ErrorMessageConstants.duplicateNicknameMessage;
     } else {
       return null;
     }
