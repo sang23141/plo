@@ -50,16 +50,13 @@ dependencies:
   firebase_storage: ^11.6.5
   flutter_image_compress: ^2.1.0
   firebase_app_check: ^0.2.1+14
-<<<<<<< HEAD
   algoliasearch: ^1.5.1
-=======
   firebase_crashlytics: ^3.4.16
   firebase_analytics: ^10.8.7
   uuid: ^4.3.3
   modal_bottom_sheet: ^2.1.2
   dropdown_button2: ^2.3.9
   card_swiper: ^3.0.1
->>>>>>> for_homescreen
 
 dev_dependencies:
   flutter_test:
