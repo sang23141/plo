@@ -11,7 +11,7 @@ class ErrorMessageConstants {
 
   static const String imageUploadError =
       "Sorry... There was an error uploading photos. Please try again";
-  static const String itemUploadError =
+  static const String postUploadError =
       "Sorry... There was an error uploading item. Please try again";
 
   static const String showItemWarningErrorMessage =
