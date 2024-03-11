@@ -59,7 +59,9 @@ class _signInScreenState extends ConsumerState<signInScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("People Link One")),
+      appBar: AppBar(
+        title: const Text("People Link One")
+      ),
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.all(20),

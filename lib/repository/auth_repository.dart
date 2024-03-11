@@ -24,6 +24,7 @@ class AuthMethods {
   }) async {
     String res = "Some error occured";
     try {
+<<<<<<< HEAD
       if (email.isNotEmpty ||
           password.isNotEmpty ||
           nickname.isNotEmpty ||
@@ -35,6 +36,12 @@ class AuthMethods {
 
         String photoUrl = await StorageMethods()
             .uploadImageToStorage('profilePics', file!, false);
+=======
+      if (email.isNotEmpty || password.isNotEmpty ||nickname.isNotEmpty ||grade.isNotEmpty ||major.isNotEmpty || file != null) {
+        UserCredential cred = await  _auth.createUserWithEmailAndPassword(email: email, password: password);
+        
+        String photoUrl = await StorageMethods().uploadProfileImageToStorage('profilePics', file!, false);
+>>>>>>> for_homescreen
         //이런 방식으로 하면 doc uid가 자동으로 auth uid로 생성이 됨
         _firestore.collection('users').doc(cred.user!.uid).set({
           'grade': grade,

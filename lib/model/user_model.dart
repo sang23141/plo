@@ -3,19 +3,28 @@ import 'package:email_vertify/constants/error_replacement_constants.dart';
 class UserModelNameConstants {
   static const userUid =  'userUid';
   static const email = 'email';
+  static const userNickname = 'nickname';
   static const userCreatedDate = 'userCreatedDate';
-  static const profile = 'profile';
+  static const grade = 'grade';
+  static const major = 'major';
+  static const profileImageUrl = "profileImageUrl";
 }
 class UserModel {
   final String userUid;
   final String email;
+  final String userNickname;
   final Timestamp? userCreatedDate;
-  final Map<String, dynamic> profile; 
+  final String major;
+  final String grade; 
+  final String profileImageUrl;
   UserModel ({
     this.userUid = ErrorReplacementConstants.notSetString,
     this.email = ErrorReplacementConstants.notSetString,
     this.userCreatedDate,
-    this.profile= const {},
+    this.userNickname = ErrorReplacementConstants.notFoundString,
+    this.grade = ErrorReplacementConstants.notFoundString,
+    this.major = ErrorReplacementConstants.notFoundString,
+    this.profileImageUrl = ErrorReplacementConstants.notFoundString
 
   });
   Map<String, dynamic> toJson() {
@@ -23,10 +32,11 @@ class UserModel {
       UserModelNameConstants.userUid: userUid,
       UserModelNameConstants.email: email,
       UserModelNameConstants.userCreatedDate: userCreatedDate,
-      UserModelNameConstants.profile: {
-        for (final entry in profile.entries)
-        entry.key.toString(): entry.value
-      }
+      UserModelNameConstants.userNickname: userNickname,
+      UserModelNameConstants.grade: grade,
+      UserModelNameConstants.major: major,
+      UserModelNameConstants.profileImageUrl: profileImageUrl,
+
     };
   }
   static UserModel? fromJson(Map<String, dynamic> json) {
@@ -36,12 +46,14 @@ class UserModel {
       ErrorReplacementConstants.notFoundString,
       email: json[UserModelNameConstants.email] ?? 
       ErrorReplacementConstants.notFoundString,
-      userCreatedDate: json[UserModelNameConstants.userCreatedDate] ,
-      profile: json[UserModelNameConstants.profile] == null ? const {} : (json[UserModelNameConstants.profile]
-      )
+      userCreatedDate: json[UserModelNameConstants.userCreatedDate],
+      userNickname: json[UserModelNameConstants.userNickname] ?? ErrorReplacementConstants.notFoundString,
+      grade: json[UserModelNameConstants.grade] ?? ErrorReplacementConstants.notFoundString,
+      major: json[UserModelNameConstants.major] ?? ErrorReplacementConstants.notFoundString,
+      profileImageUrl: json[UserModelNameConstants.profileImageUrl] ?? ErrorReplacementConstants.notFoundString
+      );
 
 
-    );
    } catch (error) {
     print("Error while converting json to User Object : ${error.toString()}");
     return null;
