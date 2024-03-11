@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:card_swiper/card_swiper.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:email_vertify/common/utils/log_util.dart';
 import 'package:email_vertify/constants/error_message_constants.dart';
@@ -10,12 +11,14 @@ import 'package:email_vertify/repository/firebase_post_repository.dart';
 import 'package:email_vertify/repository/firebasestoroage_respository.dart';
 import 'package:email_vertify/repository/image_picker_repository.dart';
 import 'package:email_vertify/views/post_write/post_write_providers.dart';
+import 'package:email_vertify/views/post_write/post_write_screen/widgets/post_image_view.dart';
 import 'package:email_vertify/views/post_write/user_provider/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:uuid/uuid.dart';
 
 class CreatePostController extends StateNotifier<AsyncValue<void>> {
+  final SwiperController _swiperController = SwiperController();
   final TextEditingController _titleController = TextEditingController();
   final TextEditingController _contentController = TextEditingController();
   final TextEditingController _categoryController = TextEditingController();
@@ -23,7 +26,7 @@ class CreatePostController extends StateNotifier<AsyncValue<void>> {
   CreatePostController(this.ref) : super(const AsyncLoading()) {
     _init();
   }
-
+  get swiperController => _swiperController;
   get titleController => _titleController;
   get contentController => _contentController;
   get categoryController => _categoryController;
@@ -45,6 +48,13 @@ class CreatePostController extends StateNotifier<AsyncValue<void>> {
     _titleController.text = editPostInformation.postTitle;
     _contentController.text = editPostInformation.postContent;
     _categoryController.text = editPostInformation.category.toString();
+  }
+  void movetoEnd() {
+    _swiperController.move(ref.read(createEditPostStateProvider).photos.length -1);
+  }
+  
+  swiperToEnd() {
+    _swiperController.index = ref.read(createEditPostStateProvider).photos.length -1;
   }
 
   pickMultipleImagesFromGallery() async {
@@ -75,6 +85,8 @@ class CreatePostController extends StateNotifier<AsyncValue<void>> {
             .updatePhotos(updatedPhotos);
       }
     }
+    swiperToEnd();
+    ref.read(imageLoadingProvider.notifier).state = false;
   }
 
   pickImageFromCamera() async {
@@ -100,6 +112,8 @@ class CreatePostController extends StateNotifier<AsyncValue<void>> {
             .updatePhotos(updatedPhotos);
       }
     }
+    swiperToEnd();
+    ref.read(imageLoadingProvider.notifier).state = false;
   }
 
   Future<bool> uploadPost({required GlobalKey<FormState> formkey}) async {

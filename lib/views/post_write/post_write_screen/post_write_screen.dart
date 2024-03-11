@@ -11,7 +11,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class CreateEditPostScreen extends ConsumerStatefulWidget {
   final CreateEditPostModel? editPostInformation;
-  CreateEditPostScreen({super.key, required this.editPostInformation});
+  CreateEditPostScreen({super.key, this.editPostInformation});
 
   @override
   ConsumerState<CreateEditPostScreen> createState() =>
