@@ -141,7 +141,7 @@ void uploadChangedPictureToStorage(
     }
 
     photoUrl = await StorageMethods()
-        .uploadImageToStorage('profilePics', image!, false);
+        .uploadProfileImageToStorage('profilePics', image!, false);
     // Get the reference to the document
     DocumentReference documentReference = FirebaseFirestore.instance
         .collection("users")
