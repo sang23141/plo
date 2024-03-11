@@ -1,8 +1,8 @@
+import 'package:email_vertify/views/profile_create_screen/profile_create_form.dart';
+import 'package:email_vertify/views/profile_create_screen/profile_create_pfp.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:email_vertify/common/widget/my_widgets.dart';
-import 'package:email_vertify/views/profile_screen.dart/profile_create_form.dart';
-import 'package:email_vertify/views/profile_screen.dart/profile_create_pfp.dart';
 //import 'package:image_picker/image_picker.dart';
 //import 'package:my_plo_personal/imagePicker.dart';
 //import 'package:cloud_firestore/cloud_firestore.dart';

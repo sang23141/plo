@@ -57,4 +57,14 @@ static String? isSamePassword(String? password, String? passwordRetype) {
       return null;
     }
   }
+  static String? titleValidator(String? title) {
+    if (title == null || title.isEmpty) return "제목을 입력하셔야 합니다";
+    if(title.length > 50) return "제목은 50자 이내여야 합니다";
+    return null;
+  }
+  static String? contentValidator(String? content) {
+    if(content == null || content.isEmpty) return "내용을 입력하셔야 합니다";
+    if(content.length > 500) return "내용은 500자 이내여야 합니다";
+    return null;
+  }
 }

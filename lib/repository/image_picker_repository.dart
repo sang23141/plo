@@ -31,7 +31,7 @@ import 'package:flutter/services.dart';
 //  }
 // for picking up image from camera
 class ImagePickerRepository {
-  Future pickImageFromGallery() async {
+  Future<ReturnType<File?>> pickImageFromGallery() async {
     final ImagePicker imagePicker = ImagePicker();
     try {
       XFile? file = await imagePicker.pickImage(source: ImageSource.gallery);
@@ -50,7 +50,7 @@ class ImagePickerRepository {
   }
 
 // for picking up image from gallery
-  Future pickImageFromCamera() async {
+  Future<ReturnType<File?>> pickImageFromCamera() async {
     final ImagePicker imagePicker = ImagePicker();
     try {
       XFile? file = await imagePicker.pickImage(source: ImageSource.camera);
@@ -65,6 +65,23 @@ class ImagePickerRepository {
     } catch (error) {
       return ErrorReturnType(error: error);
     }
+  }
+  Future<ReturnType<List<File?>>> pickMultipleImageFromGallery() async {
+    try {
+      List<XFile?> file = await ImagePicker().pickMultiImage();
+      if (file.isNotEmpty) {
+        List<File> files = file.map((photo) => File(photo!.path)).toList();
+        await compressImage(files);
+        return SuccessReturnType(isSuccess: true, data: files);
+      }
+    } on PlatformException catch (error) {
+      logToConsole("pickMultipleImageFromGallery error : ${error.toString()}");
+      return ErrorReturnType(message: "갤러리 접근을 허용해주세요", error: error);
+    } catch (error) {
+      logToConsole(error.toString());
+      return ErrorReturnType(error: error);
+    }
+    return SuccessReturnType(isSuccess: true, data: []);
   }
 
   Future<bool> compressImage(List<File> files) async {

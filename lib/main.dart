@@ -1,6 +1,5 @@
 import 'package:email_vertify/views/home_screen/home_screen.dart';
 import 'package:email_vertify/views/log_in_screen/log_in_screen.dart';
-import 'package:email_vertify/views/sign_up_screen_view.dart/sign_up_screen.dart';
 import 'package:email_vertify/views/splash_screen/splash_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -8,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'firebase_options.dart';
 import 'package:firebase_app_check/firebase_app_check.dart';
+
+import 'views/sign_up_screen_view/sign_up_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

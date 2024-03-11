@@ -31,6 +31,7 @@ class FirebasePostRepository {
       return false;
     }
   }
+  //fetching category by the upload time
   Future<List<PostModel>?> fetchPost({Timestamp? lastPostUploadTime = null, int amountFetch = 10}) async {
     try {
       final QuerySnapshot querySnapshot;
@@ -63,4 +64,9 @@ class FirebasePostRepository {
       return null;
     }
   }
+  
 }
+
+final firebasePostRepository = Provider<FirebasePostRepository>((ref) {
+  return FirebasePostRepository(ref);
+});
