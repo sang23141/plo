@@ -1,4 +1,4 @@
-import 'package:email_vertify/views/post_write/post_write_controller.dart';
+import 'package:plo/views/post_write/post_write_controller.dart';
 import 'package:flutter/material.dart' hide ModalBottomSheetRoute;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

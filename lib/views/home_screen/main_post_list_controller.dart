@@ -1,8 +1,7 @@
-
-import 'package:email_vertify/model/post_model.dart';
-import 'package:email_vertify/repository/firebase_post_repository.dart';
-import 'package:email_vertify/repository/firebase_user_repository.dart';
-import 'package:email_vertify/views/home_screen/main_post_list_provider.dart';
+import 'package:plo/model/post_model.dart';
+import 'package:plo/repository/firebase_post_repository.dart';
+import 'package:plo/repository/firebase_user_repository.dart';
+import 'package:plo/views/home_screen/main_post_list_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -13,17 +12,24 @@ class MainPostListController extends StateNotifier<AsyncValue<void>> {
   Ref ref;
   final FirebasePostRepository postRepository;
   final FirebaseUserRepository userRepository;
-  MainPostListController({required this.ref, required this. postRepository, required this.userRepository}) : super(const AsyncLoading()) {
+  MainPostListController(
+      {required this.ref,
+      required this.postRepository,
+      required this.userRepository})
+      : super(const AsyncLoading()) {
     _setUpSrollBehavior();
     _fetchInitialPosts();
   }
   _setUpSrollBehavior() async {
-    _scrollController.addListener(() async{ 
-      if(_scrollController.position.pixels == _scrollController.position.maxScrollExtent && !_isPostAllLoaded) {
+    _scrollController.addListener(() async {
+      if (_scrollController.position.pixels ==
+              _scrollController.position.maxScrollExtent &&
+          !_isPostAllLoaded) {
         await _fetchMorePosts();
       }
     });
   }
+
   get scrollController => _scrollController;
   get isPostAllLoaded => _isPostAllLoaded;
 
@@ -31,12 +37,13 @@ class MainPostListController extends StateNotifier<AsyncValue<void>> {
     try {
       state = const AsyncValue.loading();
 
-      List<PostModel>? posts = await postRepository.fetchPost(amountFetch: amountFetch);
-      if(posts == null) {
+      List<PostModel>? posts =
+          await postRepository.fetchPost(amountFetch: amountFetch);
+      if (posts == null) {
         state = AsyncValue.error("게시물을 가져오는데 실패 했습니다", StackTrace.current);
         return;
       }
-      if(posts.length < amountFetch) _isPostAllLoaded = true;
+      if (posts.length < amountFetch) _isPostAllLoaded = true;
       ref.read(mainListProvier.notifier).setPostList(posts);
     } catch (error) {
       state = AsyncValue.error(error, StackTrace.current);
@@ -48,7 +55,8 @@ class MainPostListController extends StateNotifier<AsyncValue<void>> {
   Future<void> _fetchMorePosts() async {
     try {
       final lastPostUploadTime = ref.read(mainListProvier).last.uploadTime!;
-      List<PostModel>? posts = await postRepository.fetchPost(lastPostUploadTime: lastPostUploadTime, amountFetch: amountFetch);
+      List<PostModel>? posts = await postRepository.fetchPost(
+          lastPostUploadTime: lastPostUploadTime, amountFetch: amountFetch);
       if (posts == null) {
         state = AsyncValue.error("게시물을 가져오는데 문제가 발생 했습니다", StackTrace.current);
       } else {
@@ -57,7 +65,7 @@ class MainPostListController extends StateNotifier<AsyncValue<void>> {
         }
         ref.read(mainListProvier.notifier).addListenToPostList(posts);
       }
-    } catch(error) {
+    } catch (error) {
       state = AsyncValue.error(error, StackTrace.current);
       state = const AsyncValue.data(null);
     } finally {
@@ -66,8 +74,11 @@ class MainPostListController extends StateNotifier<AsyncValue<void>> {
   }
 }
 
-final postListController = StateNotifierProvider.autoDispose<MainPostListController, AsyncValue<void>>((ref) {
+final postListController =
+    StateNotifierProvider.autoDispose<MainPostListController, AsyncValue<void>>(
+        (ref) {
   final postRepository = ref.watch(firebasePostRepository);
   final userRepository = ref.watch(firebaseUserRepository);
-  return MainPostListController(ref: ref, postRepository: postRepository, userRepository: userRepository);
+  return MainPostListController(
+      ref: ref, postRepository: postRepository, userRepository: userRepository);
 });

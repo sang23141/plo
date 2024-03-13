@@ -1,7 +1,7 @@
 import 'dart:io';
 
-import 'package:email_vertify/views/post_write/post_write_providers.dart';
-import 'package:email_vertify/views/post_write/post_write_screen/widgets/post_create_images_details.dart';
+import 'package:plo/views/post_write/post_write_providers.dart';
+import 'package:plo/views/post_write/post_write_screen/widgets/post_create_images_details.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 //import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';

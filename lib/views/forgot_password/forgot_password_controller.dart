@@ -1,5 +1,5 @@
-import 'package:email_vertify/model/types/enum_type.dart';
-import 'package:email_vertify/repository/auth_repository.dart';
+import 'package:plo/model/types/enum_type.dart';
+import 'package:plo/repository/auth_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -38,6 +38,8 @@ class ForgotPasswordController extends StateNotifier<AsyncValue<void>> {
     return true;
   }
 }
-final forgotPasswordControllerProvider = StateNotifierProvider.autoDispose<ForgotPasswordController, AsyncValue<void>>((ref) {
+
+final forgotPasswordControllerProvider = StateNotifierProvider.autoDispose<
+    ForgotPasswordController, AsyncValue<void>>((ref) {
   return ForgotPasswordController(ref);
 });

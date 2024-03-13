@@ -1,8 +1,8 @@
 import 'dart:io';
 
 import 'package:card_swiper/card_swiper.dart';
-import 'package:email_vertify/common/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:plo/common/widgets/custom_app_bar.dart';
 
 class CreateEditPostDetailWidget extends StatelessWidget {
   int index;
@@ -12,7 +12,7 @@ class CreateEditPostDetailWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: const CustomAppBar(),
+        appBar: const BackButtonAppBar(),
         body: SafeArea(
             child: Column(
           children: [

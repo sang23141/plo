@@ -1,11 +1,11 @@
 import 'dart:io';
 
 import 'package:card_swiper/card_swiper.dart';
-import 'package:email_vertify/common/utils/log_util.dart';
-import 'package:email_vertify/views/post_write/post_write_controller.dart';
-import 'package:email_vertify/views/post_write/post_write_providers.dart';
-import 'package:email_vertify/views/post_write/post_write_screen/widgets/post_image_order.dart';
-import 'package:email_vertify/views/post_write/post_write_screen/widgets/post_image_upload.dart';
+import 'package:plo/common/utils/log_util.dart';
+import 'package:plo/views/post_write/post_write_controller.dart';
+import 'package:plo/views/post_write/post_write_providers.dart';
+import 'package:plo/views/post_write/post_write_screen/widgets/post_image_order.dart';
+import 'package:plo/views/post_write/post_write_screen/widgets/post_image_upload.dart';
 import 'package:flutter/material.dart' hide ModalBottomSheetRoute;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'dart:typed_data';
-import 'package:email_vertify/common/utils/log_util.dart';
-import 'package:email_vertify/model/types/return_type.dart';
+import 'package:plo/common/utils/log_util.dart';
+import 'package:plo/model/types/return_type.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
@@ -37,7 +37,7 @@ class ImagePickerRepository {
       XFile? file = await imagePicker.pickImage(source: ImageSource.gallery);
 
       if (file != null) {
-        final FileCompression = [File(file!.path)];
+        final FileCompression = [File(file.path)];
         await compressImage(FileCompression);
         return SuccessReturnType(isSuccess: true, data: FileCompression[0]);
       }
@@ -66,6 +66,7 @@ class ImagePickerRepository {
       return ErrorReturnType(error: error);
     }
   }
+
   Future<ReturnType<List<File?>>> pickMultipleImageFromGallery() async {
     try {
       List<XFile?> file = await ImagePicker().pickMultiImage();
@@ -89,13 +90,13 @@ class ImagePickerRepository {
       int imgCount = files.length;
       int imgCompressed = 0;
       for (int i = 0; i < files.length; i++) {
-        Uint8List? image_as_bytes = await FlutterImageCompress.compressWithFile(
+        Uint8List? imageAsBytes = await FlutterImageCompress.compressWithFile(
             files[i].path,
             quality: 50);
-        if (image_as_bytes != null) {
+        if (imageAsBytes != null) {
           imgCompressed++;
           File compressedFile =
-              await File(files[i].path).writeAsBytes(image_as_bytes);
+              await File(files[i].path).writeAsBytes(imageAsBytes);
           files[i] = compressedFile;
         }
       }

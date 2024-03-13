@@ -1,6 +1,6 @@
-import 'package:email_vertify/repository/auth_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:plo/repository/auth_repository.dart';
 
 class LoginWithEmailController extends StateNotifier<AsyncValue<void>> {
   final Ref ref;

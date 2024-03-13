@@ -1,13 +1,13 @@
-import 'package:email_vertify/common/utils/riverpod_error.dart';
-import 'package:email_vertify/common/widgets/custom_app_bar.dart';
-import 'package:email_vertify/model/state_model/create_edit_post_model.dart';
-import 'package:email_vertify/views/home_screen/main_post_list_controller.dart';
-import 'package:email_vertify/views/post_write/post_write_controller.dart';
-import 'package:email_vertify/views/post_write/post_write_providers.dart';
-import 'package:email_vertify/views/post_write/post_write_screen/widgets/post_create_form.dart';
-import 'package:email_vertify/views/post_write/post_write_screen/widgets/post_image_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:plo/common/utils/riverpod_error.dart';
+import 'package:plo/common/widgets/custom_app_bar.dart';
+import 'package:plo/model/state_model/create_edit_post_model.dart';
+import 'package:plo/views/home_screen/main_post_list_controller.dart';
+import 'package:plo/views/post_write/post_write_controller.dart';
+import 'package:plo/views/post_write/post_write_providers.dart';
+import 'package:plo/views/post_write/post_write_screen/widgets/post_create_form.dart';
+import 'package:plo/views/post_write/post_write_screen/widgets/post_image_view.dart';
 
 class CreateEditPostScreen extends ConsumerStatefulWidget {
   final CreateEditPostModel? editPostInformation;
@@ -46,7 +46,7 @@ class _CreateEditPostScreenState extends ConsumerState<CreateEditPostScreen> {
     var postState = ref.watch(createEditPostStateProvider);
 
     return Scaffold(
-        appBar: CustomAppBar(
+        appBar: BackButtonAppBar(
             title: postState.isForEdit ? "Edit Post" : "Sell Post"),
         body: SafeArea(
           child: Padding(

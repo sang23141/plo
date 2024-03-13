@@ -1,8 +1,8 @@
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:email_vertify/constants/firebase_contants.dart';
-import 'package:email_vertify/model/user_model.dart';
+import 'package:plo/constants/firebase_contants.dart';
+import 'package:plo/model/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -12,6 +12,7 @@ class FirebaseUserRepository {
   void _logHelper(String typeofAction, String funcitonName) {
     log("Firestore was Used ($typeofAction) in $funcitonName in FirebaseUserRepository");
   }
+
   Future<bool> uploadUserModel(UserModel user) async {
     try {
       await FirebaseFirestore.instance
@@ -25,15 +26,17 @@ class FirebaseUserRepository {
       return false;
     }
   }
+
   Future<UserModel?> fetchUser() async {
     try {
       DocumentSnapshot documentSnapshot = await FirebaseFirestore.instance
-      .collection(usercollectionName)
-      .doc(_auth.currentUser!.uid)
-      .get();
+          .collection(usercollectionName)
+          .doc(_auth.currentUser!.uid)
+          .get();
       _logHelper("Get", "UserModel");
-      if(documentSnapshot.exists) {
-        UserModel? jsontoUserConverted = UserModel.fromJson(documentSnapshot.data() as Map<String,dynamic>);
+      if (documentSnapshot.exists) {
+        UserModel? jsontoUserConverted =
+            UserModel.fromJson(documentSnapshot.data() as Map<String, dynamic>);
         return jsontoUserConverted;
       } else {
         return null;

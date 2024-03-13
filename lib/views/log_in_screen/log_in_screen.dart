@@ -1,9 +1,9 @@
-import 'package:email_vertify/model/types/enum_type.dart';
-import 'package:email_vertify/views/forgot_password/forgot_password_screen.dart';
-import 'package:email_vertify/views/log_in_screen/log_in_controller.dart';
-import 'package:email_vertify/views/log_in_screen/widgets/log_in_textfield.dart';
-import 'package:email_vertify/views/settings_screen/settings_screen.dart';
-import 'package:email_vertify/views/sign_up_screen_view/sign_up_screen.dart';
+import 'package:plo/model/types/enum_type.dart';
+import 'package:plo/views/forgot_password/forgot_password_screen.dart';
+import 'package:plo/views/log_in_screen/log_in_controller.dart';
+import 'package:plo/views/log_in_screen/widgets/log_in_textfield.dart';
+import 'package:plo/views/settings_screen/settings_screen.dart';
+import 'package:plo/views/sign_up_screen_view/sign_up_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

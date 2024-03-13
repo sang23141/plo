@@ -1,14 +1,14 @@
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:email_vertify/common/utils/log_util.dart';
-import 'package:email_vertify/constants/firebase_contants.dart';
-import 'package:email_vertify/model/types/enum_type.dart';
-import 'package:email_vertify/model/types/return_type.dart';
-import 'package:email_vertify/model/user.dart' as model;
-import 'package:email_vertify/repository/auth_repository.dart';
-import 'package:email_vertify/repository/firebasestoroage_respository.dart';
-import 'package:email_vertify/repository/image_picker_repository.dart';
+import 'package:plo/common/utils/log_util.dart';
+import 'package:plo/constants/firebase_contants.dart';
+import 'package:plo/model/types/enum_type.dart';
+import 'package:plo/model/types/return_type.dart';
+import 'package:plo/model/user.dart' as model;
+import 'package:plo/repository/auth_repository.dart';
+import 'package:plo/repository/firebasestoroage_respository.dart';
+import 'package:plo/repository/image_picker_repository.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker/image_picker.dart';

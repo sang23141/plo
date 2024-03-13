@@ -1,6 +1,6 @@
-import 'package:email_vertify/common/widgets/custom_app_bar.dart';
-import 'package:email_vertify/views/post_write/post_write_screen/post_write_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:plo/common/widgets/custom_app_bar.dart';
+import 'package:plo/views/post_write/post_write_screen/post_write_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -17,13 +17,13 @@ class _HomeScreenState extends State<HomeScreen> {
       const Icon(Icons.home),
       const Icon(Icons.search),
       FloatingActionButton(onPressed: () async {
-        Navigator.of(context).push(
-            MaterialPageRoute(builder: (context) => CreateEditPostScreen()));
+        Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => const CreateEditPostScreen()));
       }),
       const Icon(Icons.person_4_rounded)
     ];
     return Scaffold(
-      appBar: const CustomAppBar(),
+      appBar: const BackButtonAppBar(),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,

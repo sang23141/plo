@@ -1,9 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:email_vertify/common/widgets/custom_app_bar.dart';
-import 'package:email_vertify/constants/firebase_contants.dart';
-import 'package:email_vertify/views/settings_screen/settings_controller.dart';
-import 'package:email_vertify/views/settings_screen/widgets/postcard.dart';
 import 'package:flutter/material.dart';
+import 'package:plo/common/widgets/custom_app_bar.dart';
+import 'package:plo/constants/firebase_contants.dart';
+import 'package:plo/views/settings_screen/settings_controller.dart';
+import 'package:plo/views/settings_screen/widgets/postcard.dart';
 
 class SavedPostScreen extends StatefulWidget {
   const SavedPostScreen({super.key});
@@ -33,7 +33,7 @@ class _SavedPostScreenState extends State<SavedPostScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(title: "저장한 게시물"),
+      appBar: const BackButtonAppBar(title: "저장한 게시물"),
       body: ListView.builder(
         itemCount: documentList.length,
         itemBuilder: (context, index) => PostCard(

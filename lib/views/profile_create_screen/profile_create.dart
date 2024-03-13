@@ -1,18 +1,18 @@
 import 'dart:io';
 
-import 'package:email_vertify/common/validator/validator.dart';
-import 'package:email_vertify/common/widgets/custom_app_bar.dart';
-import 'package:email_vertify/common/widgets/my_widgets.dart';
-import 'package:email_vertify/model/types/return_type.dart';
-import 'package:email_vertify/repository/auth_repository.dart';
-import 'package:email_vertify/repository/image_picker_repository.dart';
-import 'package:email_vertify/views/log_in_screen/log_in_screen.dart';
-import 'package:email_vertify/views/profile_create_screen/profile_create_controller.dart';
-import 'package:email_vertify/views/sign_up_screen_view/provider/signup_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:plo/common/validator/validator.dart';
+import 'package:plo/common/widgets/custom_app_bar.dart';
+import 'package:plo/common/widgets/my_widgets.dart';
+import 'package:plo/model/types/return_type.dart';
+import 'package:plo/repository/auth_repository.dart';
+import 'package:plo/repository/image_picker_repository.dart';
+import 'package:plo/views/log_in_screen/log_in_screen.dart';
+import 'package:plo/views/profile_create_screen/profile_create_controller.dart';
+import 'package:plo/views/sign_up_screen_view/provider/signup_provider.dart';
 
 class ProfileCreate extends ConsumerStatefulWidget {
   const ProfileCreate({super.key});
@@ -74,7 +74,7 @@ class _ProfileState extends ConsumerState<ProfileCreate> {
     File? profilePic = ref.watch(selectedFile);
     //Front-end codes
     return Scaffold(
-      appBar: const CustomAppBar(),
+      appBar: const BackButtonAppBar(),
       body: Container(
         alignment: Alignment.center,
         child: GestureDetector(
