@@ -1,4 +1,5 @@
-import 'package:email_vertify/common/widget/my_widgets.dart';
+import 'package:email_vertify/common/widgets/custom_app_bar.dart';
+import 'package:email_vertify/common/widgets/my_widgets.dart';
 import 'package:email_vertify/views/Terms_of_service_screen/term1.dart';
 import 'package:email_vertify/views/Terms_of_service_screen/term2.dart';
 import 'package:email_vertify/views/Terms_of_service_screen/term3.dart';
@@ -53,16 +54,7 @@ class _TermsOfServiceScreenState extends ConsumerState<TermsOfServiceScreen> {
     final termInfo = ref.watch(termsInfoProvider);
 
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        leading: BackButton(
-          color: const Color(0xFF000000),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-      ),
+      appBar: const CustomAppBar(),
       body: SingleChildScrollView(
         child: Align(
           alignment: Alignment.center,

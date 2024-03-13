@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:email_vertify/common/widgets/custom_app_bar.dart';
 import 'package:email_vertify/constants/firebase_contants.dart';
 import 'package:email_vertify/views/settings_screen/settings_controller.dart';
 import 'package:email_vertify/views/settings_screen/widgets/postcard.dart';
@@ -32,20 +33,7 @@ class _SavedPostScreenState extends State<SavedPostScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        leading: BackButton(
-          color: const Color(0xFF000000),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-        title: const Text(
-          "저장한 게시물",
-          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-        ),
-      ),
+      appBar: const CustomAppBar(title: "저장한 게시물"),
       body: ListView.builder(
         itemCount: documentList.length,
         itemBuilder: (context, index) => PostCard(

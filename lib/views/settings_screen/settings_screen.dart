@@ -9,7 +9,7 @@ import 'package:email_vertify/views/settings_screen/widgets/alert_dialogue.dart'
 import 'package:email_vertify/views/settings_screen/widgets/list_button_widget.dart';
 import 'package:email_vertify/views/settings_screen/widgets/modal_bottom_sheet.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide ModalBottomSheetRoute;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class SettingsScreen extends ConsumerStatefulWidget {
@@ -29,7 +29,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
 
   void goToSignInScreen() {
     Navigator.of(context).pushAndRemoveUntil(
-        MaterialPageRoute(builder: (context) => const signInScreen()),
+        MaterialPageRoute(builder: (context) => const SignInScreen()),
         (Route<dynamic> route) => false);
   }
 

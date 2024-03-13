@@ -1,6 +1,5 @@
 import 'package:email_vertify/model/types/enum_type.dart';
 import 'package:email_vertify/views/forgot_password/forgot_password_screen.dart';
-import 'package:email_vertify/views/home_screen/home_screen.dart';
 import 'package:email_vertify/views/log_in_screen/log_in_controller.dart';
 import 'package:email_vertify/views/log_in_screen/widgets/log_in_textfield.dart';
 import 'package:email_vertify/views/settings_screen/settings_screen.dart';
@@ -8,44 +7,18 @@ import 'package:email_vertify/views/sign_up_screen_view/sign_up_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-// class SignInScreen extends StatelessWidget {
-//   const SignInScreen({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         backgroundColor: Colors.transparent,
-//         elevation: 0,
-//         leading: BackButton(
-//             color: const Color(0xFF000000),
-//             onPressed: () {
-//               Navigator.pop(context);
-//             }),
-//       ),
-//       body: const Column(
-//         children: [
-//           Center(
-//             child: Text("Log-in Screen"),
-//           )
-//         ],
-//       ),
-//     );
-//   }
-// }
-
-class signInScreen extends ConsumerStatefulWidget {
-  const signInScreen({Key? key}) : super(key: key);
+class SignInScreen extends ConsumerStatefulWidget {
+  const SignInScreen({Key? key}) : super(key: key);
 
   @override
-  ConsumerState<signInScreen> createState() => _signInScreenState();
+  ConsumerState<SignInScreen> createState() => _SignInScreenState();
 }
 
-class _signInScreenState extends ConsumerState<signInScreen> {
+class _SignInScreenState extends ConsumerState<SignInScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  final snackbar = SnackBar(content: Text("result"));
+  final snackbar = const SnackBar(content: Text("result"));
 
   @override
   void dispose() {
@@ -59,35 +32,33 @@ class _signInScreenState extends ConsumerState<signInScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("People Link One")
-      ),
+      appBar: AppBar(title: const Text("People Link One")),
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.all(20),
+          padding: const EdgeInsets.all(20),
           child: SingleChildScrollView(
-            physics: BouncingScrollPhysics(),
+            physics: const BouncingScrollPhysics(),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text('Log-in'),
-                SizedBox(height: 10),
+                const Text('Log-in'),
+                const SizedBox(height: 10),
                 LogInTextFieldWidget(
                   formKey: _formKey,
                   emailController: emailController,
                   passwordController: passwordController,
                 ),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 TextButton(
                   onPressed: () {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => ForgotPasswordScreen(),
+                        builder: (context) => const ForgotPasswordScreen(),
                       ),
                     );
                   },
-                  child: Text("Forgot Password?"),
+                  child: const Text("Forgot Password?"),
                 ),
                 TextButton(
                   onPressed: () async {
@@ -107,8 +78,9 @@ class _signInScreenState extends ConsumerState<signInScreen> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const SettingsScreen()//HomeScreen(),
-                          ),
+                              builder: (context) =>
+                                  const SettingsScreen() //HomeScreen(),
+                              ),
                         );
                       } else {
                         ScaffoldMessenger.of(context).showSnackBar(snackbar);
@@ -117,11 +89,11 @@ class _signInScreenState extends ConsumerState<signInScreen> {
                       Navigator.of(context).pop();
                     }
                   },
-                  child: Text("Log-in"),
+                  child: const Text("Log-in"),
                 ),
                 defaultSpacing,
                 Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                  Text("New User"),
+                  const Text("New User"),
                   TextButton(
                     onPressed: () {
                       Navigator.push(
@@ -130,7 +102,7 @@ class _signInScreenState extends ConsumerState<signInScreen> {
                             builder: (context) => const SignUpScreen()),
                       );
                     },
-                    child: Text("Sign-Up"),
+                    child: const Text("Sign-Up"),
                   )
                 ]),
               ],
