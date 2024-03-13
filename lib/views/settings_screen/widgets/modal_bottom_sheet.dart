@@ -4,7 +4,7 @@ import 'package:email_vertify/views/settings_screen/profile_modify_screen.dart';
 import 'package:email_vertify/views/settings_screen/settings_controller.dart';
 import 'package:email_vertify/views/settings_screen/settings_screen.dart';
 import 'package:email_vertify/views/settings_screen/widgets/list_button_widget.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide ModalBottomSheetRoute;
 
 void showChoiceModalBottomSheet(context) {
   showModalBottomSheet<void>(

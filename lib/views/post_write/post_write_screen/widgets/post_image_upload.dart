@@ -1,7 +1,6 @@
 import 'package:email_vertify/views/post_write/post_write_controller.dart';
-import 'package:email_vertify/views/post_write/post_write_providers.dart';
+import 'package:flutter/material.dart' hide ModalBottomSheetRoute;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter/material.dart';
 
 class CreateEditPostImage extends ConsumerWidget {
   const CreateEditPostImage({super.key});
@@ -11,7 +10,7 @@ class CreateEditPostImage extends ConsumerWidget {
         child: SafeArea(
       child: Column(children: [
         ElevatedButton(
-            child: Text("Add a Picture"),
+            child: const Text("Add a Picture"),
             onPressed: () {
               showModalBottomSheet(
                 context: context,
@@ -20,8 +19,8 @@ class CreateEditPostImage extends ConsumerWidget {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         ListTile(
-                            leading: Icon(Icons.camera),
-                            title: Text("카메라"),
+                            leading: const Icon(Icons.camera),
+                            title: const Text("카메라"),
                             onTap: () async {
                               await ref
                                   .read(createEditPostStateController.notifier)
@@ -29,13 +28,14 @@ class CreateEditPostImage extends ConsumerWidget {
                               Navigator.of(context).pop;
                             }),
                         ListTile(
-                          leading: Icon(Icons.photo_library),
-                          title: Text("갤러리"),
-                          onTap: () async {
-                            await ref.read(createEditPostStateController.notifier).pickMultipleImagesFromGallery();
-                            Navigator.of(context).pop;
-                          }
-                        )
+                            leading: const Icon(Icons.photo_library),
+                            title: const Text("갤러리"),
+                            onTap: () async {
+                              await ref
+                                  .read(createEditPostStateController.notifier)
+                                  .pickMultipleImagesFromGallery();
+                              Navigator.of(context).pop;
+                            })
                       ]);
                 },
               );
