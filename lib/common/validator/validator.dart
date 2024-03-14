@@ -1,5 +1,5 @@
-import 'package:email_vertify/constants/error_message_constants.dart';
-import 'package:email_vertify/views/profile_create_screen/profile_create_controller.dart';
+import 'package:plo/constants/error_message_constants.dart';
+import 'package:plo/views/profile_create_screen/profile_create_controller.dart';
 
 class Validator {
   static String? validatePSUEmail(String? email) {
@@ -71,14 +71,16 @@ class Validator {
       return null;
     }
   }
+
   static String? titleValidator(String? title) {
     if (title == null || title.isEmpty) return "제목을 입력하셔야 합니다";
-    if(title.length > 50) return "제목은 50자 이내여야 합니다";
+    if (title.length > 50) return "제목은 50자 이내여야 합니다";
     return null;
   }
+
   static String? contentValidator(String? content) {
-    if(content == null || content.isEmpty) return "내용을 입력하셔야 합니다";
-    if(content.length > 500) return "내용은 500자 이내여야 합니다";
+    if (content == null || content.isEmpty) return "내용을 입력하셔야 합니다";
+    if (content.length > 500) return "내용은 500자 이내여야 합니다";
     return null;
   }
 }

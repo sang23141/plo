@@ -2,19 +2,19 @@ import 'dart:io';
 
 import 'package:card_swiper/card_swiper.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:email_vertify/common/utils/log_util.dart';
-import 'package:email_vertify/constants/error_message_constants.dart';
-import 'package:email_vertify/model/post_model.dart';
-import 'package:email_vertify/model/state_model/create_edit_post_model.dart';
-import 'package:email_vertify/model/types/return_type.dart';
-import 'package:email_vertify/repository/firebase_post_repository.dart';
-import 'package:email_vertify/repository/firebasestoroage_respository.dart';
-import 'package:email_vertify/repository/image_picker_repository.dart';
-import 'package:email_vertify/views/post_write/post_write_providers.dart';
-import 'package:email_vertify/views/post_write/post_write_screen/widgets/post_image_view.dart';
-import 'package:email_vertify/views/post_write/user_provider/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:plo/common/utils/log_util.dart';
+import 'package:plo/constants/error_message_constants.dart';
+import 'package:plo/model/post_model.dart';
+import 'package:plo/model/state_model/create_edit_post_model.dart';
+import 'package:plo/model/types/return_type.dart';
+import 'package:plo/repository/firebase_post_repository.dart';
+import 'package:plo/repository/firebasestoroage_respository.dart';
+import 'package:plo/repository/image_picker_repository.dart';
+import 'package:plo/views/post_write/post_write_providers.dart';
+import 'package:plo/views/post_write/post_write_screen/widgets/post_image_view.dart';
+import 'package:plo/views/post_write/user_provider/user_provider.dart';
 import 'package:uuid/uuid.dart';
 
 class CreatePostController extends StateNotifier<AsyncValue<void>> {
@@ -49,12 +49,15 @@ class CreatePostController extends StateNotifier<AsyncValue<void>> {
     _contentController.text = editPostInformation.postContent;
     _categoryController.text = editPostInformation.category.toString();
   }
+
   void movetoEnd() {
-    _swiperController.move(ref.read(createEditPostStateProvider).photos.length -1);
+    _swiperController
+        .move(ref.read(createEditPostStateProvider).photos.length - 1);
   }
-  
+
   swiperToEnd() {
-    _swiperController.index = ref.read(createEditPostStateProvider).photos.length -1;
+    _swiperController.index =
+        ref.read(createEditPostStateProvider).photos.length - 1;
   }
 
   pickMultipleImagesFromGallery() async {
@@ -141,7 +144,7 @@ class CreatePostController extends StateNotifier<AsyncValue<void>> {
       }
       final user = ref.read(currentUserProvider)!;
       final String pid =
-          isForEdit ? postState.editPostInformation!.pid : Uuid().v1();
+          isForEdit ? postState.editPostInformation!.pid : const Uuid().v1();
       final photos = postState.photos;
       List<String>? photoUrls = await ref
           .watch(firebaseStorageProvider)
@@ -149,7 +152,7 @@ class CreatePostController extends StateNotifier<AsyncValue<void>> {
       if (photoUrls == null) {
         state = AsyncError(
             ErrorMessageConstants.imageUploadError, StackTrace.current);
-        state = AsyncData(null);
+        state = const AsyncData(null);
         return false;
       }
       PostModel post;
@@ -181,7 +184,7 @@ class CreatePostController extends StateNotifier<AsyncValue<void>> {
       if (postUploadResult == false) {
         state = AsyncError(
             ErrorMessageConstants.postUploadError, StackTrace.current);
-        state = AsyncData(null);
+        state = const AsyncData(null);
         return false;
       }
       return true;
@@ -193,6 +196,8 @@ class CreatePostController extends StateNotifier<AsyncValue<void>> {
     }
   }
 }
-final createEditPostStateController = StateNotifierProvider<CreatePostController, AsyncValue<void>>((ref) {
+
+final createEditPostStateController =
+    StateNotifierProvider<CreatePostController, AsyncValue<void>>((ref) {
   return CreatePostController(ref);
 });

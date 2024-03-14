@@ -1,15 +1,15 @@
-import 'package:email_vertify/repository/auth_repository.dart';
-import 'package:email_vertify/views/log_in_screen/log_in_screen.dart';
-import 'package:email_vertify/views/settings_screen/likedpost_screen.dart';
-import 'package:email_vertify/views/settings_screen/mypost_screen.dart';
-import 'package:email_vertify/views/settings_screen/provider/user_provider.dart';
-import 'package:email_vertify/views/settings_screen/savedpost_screen.dart';
-import 'package:email_vertify/views/settings_screen/settings_controller.dart';
-import 'package:email_vertify/views/settings_screen/widgets/alert_dialogue.dart';
-import 'package:email_vertify/views/settings_screen/widgets/list_button_widget.dart';
-import 'package:email_vertify/views/settings_screen/widgets/modal_bottom_sheet.dart';
+import 'package:plo/repository/auth_repository.dart';
+import 'package:plo/views/log_in_screen/log_in_screen.dart';
+import 'package:plo/views/settings_screen/likedpost_screen.dart';
+import 'package:plo/views/settings_screen/mypost_screen.dart';
+import 'package:plo/views/settings_screen/provider/user_provider.dart';
+import 'package:plo/views/settings_screen/savedpost_screen.dart';
+import 'package:plo/views/settings_screen/settings_controller.dart';
+import 'package:plo/views/settings_screen/widgets/alert_dialogue.dart';
+import 'package:plo/views/settings_screen/widgets/list_button_widget.dart';
+import 'package:plo/views/settings_screen/widgets/modal_bottom_sheet.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide ModalBottomSheetRoute;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class SettingsScreen extends ConsumerStatefulWidget {
@@ -29,7 +29,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
 
   void goToSignInScreen() {
     Navigator.of(context).pushAndRemoveUntil(
-        MaterialPageRoute(builder: (context) => const signInScreen()),
+        MaterialPageRoute(builder: (context) => const SignInScreen()),
         (Route<dynamic> route) => false);
   }
 

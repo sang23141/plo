@@ -1,8 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:email_vertify/constants/firebase_contants.dart';
-import 'package:email_vertify/views/settings_screen/settings_controller.dart';
-import 'package:email_vertify/views/settings_screen/widgets/postcard.dart';
 import 'package:flutter/material.dart';
+import 'package:plo/common/widgets/custom_app_bar.dart';
+import 'package:plo/constants/firebase_contants.dart';
+import 'package:plo/views/settings_screen/settings_controller.dart';
+import 'package:plo/views/settings_screen/widgets/postcard.dart';
 
 class LikedPostScreen extends StatefulWidget {
   const LikedPostScreen({super.key});
@@ -19,10 +20,12 @@ class _LikedPostScreenState extends State<LikedPostScreen> {
   @override
   void initState() {
     super.initState();
-    getPosts(FirebaseConstants.likedRecordscollectionName,lastDocument, documentList);
+    getPosts(FirebaseConstants.likedRecordscollectionName, lastDocument,
+        documentList);
     _controller.addListener(() {
       if (_controller.position.pixels == _controller.position.maxScrollExtent) {
-        getPosts(FirebaseConstants.likedRecordscollectionName, lastDocument, documentList);
+        getPosts(FirebaseConstants.likedRecordscollectionName, lastDocument,
+            documentList);
       }
     });
   }
@@ -30,20 +33,7 @@ class _LikedPostScreenState extends State<LikedPostScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        leading: BackButton(
-          color: const Color(0xFF000000),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-        title: const Text(
-          "좋아요한 게시물",
-          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-        ),
-      ),
+      appBar: const BackButtonAppBar(title: "좋아요한 게시물"),
       body: ListView.builder(
         itemCount: documentList.length,
         itemBuilder: (context, index) => PostCard(

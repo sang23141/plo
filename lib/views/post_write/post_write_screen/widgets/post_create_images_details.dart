@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
+import 'package:plo/common/widgets/custom_app_bar.dart';
 
 class CreateEditPostDetailWidget extends StatelessWidget {
   int index;
@@ -11,7 +12,7 @@ class CreateEditPostDetailWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(),
+        appBar: const BackButtonAppBar(),
         body: SafeArea(
             child: Column(
           children: [
@@ -25,7 +26,7 @@ class CreateEditPostDetailWidget extends StatelessWidget {
                   child: Container(
                     child: photos[index] is File
                         ? Image.file(photos[index] as File)
-                        : Text("No More photos"),
+                        : const Text("No More photos"),
                   ),
                 ),
               ),

@@ -1,13 +1,11 @@
-import 'dart:ffi';
-
 import 'package:dropdown_button2/dropdown_button2.dart';
-import 'package:email_vertify/common/validator/validator.dart';
-import 'package:email_vertify/model/types/category_type.dart';
-import 'package:email_vertify/views/post_write/post_write_controller.dart';
-import 'package:email_vertify/views/post_write/post_write_providers.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter/material.dart';
+import 'package:plo/common/validator/validator.dart';
+import 'package:plo/model/types/category_type.dart';
+import 'package:plo/views/post_write/post_write_controller.dart';
+import 'package:plo/views/post_write/post_write_providers.dart';
 
 class CreateEditPostFormWidget extends ConsumerWidget {
   final GlobalKey<FormState> formKey;
@@ -23,7 +21,7 @@ class CreateEditPostFormWidget extends ConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Text("제목"),
+            const Text("제목"),
             defaultSpacing,
             TextFormField(
                 controller: ref
@@ -32,7 +30,7 @@ class CreateEditPostFormWidget extends ConsumerWidget {
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
-                    borderSide: BorderSide(color: Colors.black),
+                    borderSide: const BorderSide(color: Colors.black),
                   ),
                   hintText: "제목",
                 ),
@@ -42,10 +40,10 @@ class CreateEditPostFormWidget extends ConsumerWidget {
                   return Validator.titleValidator(value);
                 }),
             defaultSpacing,
-            Text("카테고리"),
+            const Text("카테고리"),
             DropdownButtonHideUnderline(
               child: DropdownButton2(
-                style: TextStyle(fontWeight: FontWeight.bold),
+                style: const TextStyle(fontWeight: FontWeight.bold),
                 buttonStyleData: ButtonStyleData(
                   decoration: BoxDecoration(
                     border: Border.all(),
@@ -60,8 +58,8 @@ class CreateEditPostFormWidget extends ConsumerWidget {
                   maxHeight: 150,
                   useSafeArea: true,
                 ),
-                menuItemStyleData: MenuItemStyleData(),
-                customButton: Container(
+                menuItemStyleData: const MenuItemStyleData(),
+                customButton: SizedBox(
                   width: double.infinity,
                   height: 30,
                   child: Row(
@@ -73,7 +71,7 @@ class CreateEditPostFormWidget extends ConsumerWidget {
                       Expanded(
                         child: Container(),
                       ),
-                      Icon(Icons.arrow_downward)
+                      const Icon(Icons.arrow_downward)
                     ],
                   ),
                 ),
@@ -81,24 +79,27 @@ class CreateEditPostFormWidget extends ConsumerWidget {
                     .sublist(0, CategoryType.values.length - 1)
                     .map(
                       (categories) => DropdownMenuItem(
-                        alignment: Alignment.centerLeft,
-                        value: categories.toString(),
-                        child: Container(
-                          width: double.infinity,
-                          padding:EdgeInsets.all(10),
-                        )
-                      ),
-                    ).toList(),
-                    onChanged: (value) {
-                      if(value != null) {
-                        CategoryType newCategory = CategoryType.stringToCategory(value);
-                        ref.read(createEditPostStateProvider.notifier).updateCategory(newCategory);
-                      }
-                    },
+                          alignment: Alignment.centerLeft,
+                          value: categories.toString(),
+                          child: Container(
+                            width: double.infinity,
+                            padding: const EdgeInsets.all(10),
+                          )),
+                    )
+                    .toList(),
+                onChanged: (value) {
+                  if (value != null) {
+                    CategoryType newCategory =
+                        CategoryType.stringToCategory(value);
+                    ref
+                        .read(createEditPostStateProvider.notifier)
+                        .updateCategory(newCategory);
+                  }
+                },
               ),
             ),
             defaultSpacing,
-            Text("내용"),
+            const Text("내용"),
             defaultSpacing,
             TextFormField(
                 controller: ref
@@ -107,7 +108,7 @@ class CreateEditPostFormWidget extends ConsumerWidget {
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
-                    borderSide: BorderSide(color: Colors.black),
+                    borderSide: const BorderSide(color: Colors.black),
                   ),
                   hintText: "내용",
                 ),

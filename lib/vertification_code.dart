@@ -1,8 +1,10 @@
 import 'dart:async';
-import 'package:email_vertify/services/api_service.dart';
-import 'package:email_vertify/common/widget/my_widgets.dart';
-import 'package:email_vertify/views/profile_create_screen/profile_create.dart';
+
 import 'package:flutter/material.dart';
+import 'package:plo/common/widgets/custom_app_bar.dart';
+import 'package:plo/common/widgets/my_widgets.dart';
+import 'package:plo/services/api_service.dart';
+import 'package:plo/views/profile_create_screen/profile_create.dart';
 
 class VertCodeScreen extends StatefulWidget {
   VertCodeScreen(
@@ -113,16 +115,7 @@ class _VertCodeScreenState extends State<VertCodeScreen> {
         FocusManager.instance.primaryFocus?.unfocus();
       },
       child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          leading: BackButton(
-            color: const Color(0xFF000000),
-            onPressed: () {
-              Navigator.pop(context);
-            },
-          ),
-        ),
+        appBar: const BackButtonAppBar(),
         body: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),

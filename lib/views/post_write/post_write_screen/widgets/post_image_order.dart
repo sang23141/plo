@@ -1,10 +1,10 @@
 import 'dart:io';
 
-import 'package:email_vertify/views/post_write/post_write_providers.dart';
-import 'package:email_vertify/views/post_write/post_write_screen/widgets/post_create_images_details.dart';
+import 'package:plo/views/post_write/post_write_providers.dart';
+import 'package:plo/views/post_write/post_write_screen/widgets/post_create_images_details.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+//import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 class CreateEditPostImageOrderWidget extends ConsumerStatefulWidget {
   const CreateEditPostImageOrderWidget({super.key});
@@ -31,22 +31,22 @@ class _PhotoOrderState extends ConsumerState<CreateEditPostImageOrderWidget> {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
         ),
-        margin: isForProxy ? null : EdgeInsets.only(bottom: 15),
-        padding: EdgeInsets.all(10),
+        margin: isForProxy ? null : const EdgeInsets.only(bottom: 15),
+        padding: const EdgeInsets.all(10),
         child: Row(
           children: [
             Expanded(
               flex: 3,
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(10),
-                child: Container(
+                child: SizedBox(
                     height: double.infinity,
                     child: photo is File
                         ? Image.file(
-                            photo as File,
+                            photo,
                             fit: BoxFit.cover,
                           )
-                        : Text("There is an error loading the photo")),
+                        : const Text("There is an error loading the photo")),
               ),
             ),
             const SizedBox(height: 10),
@@ -72,7 +72,7 @@ class _PhotoOrderState extends ConsumerState<CreateEditPostImageOrderWidget> {
                   _photos.removeAt(index);
                   setState(() {});
                 },
-                icon: Icon(Icons.delete))
+                icon: const Icon(Icons.delete))
           ],
         ),
       ),
@@ -97,7 +97,7 @@ class _PhotoOrderState extends ConsumerState<CreateEditPostImageOrderWidget> {
           child: Expanded(
             child: Column(
               children: [
-                Text("이미지 순서 선택"),
+                const Text("이미지 순서 선택"),
                 ReorderableListView(
                   proxyDecorator: (child, index, animation) => Material(
                     child: Container(
@@ -111,10 +111,6 @@ class _PhotoOrderState extends ConsumerState<CreateEditPostImageOrderWidget> {
                           .toList()[index],
                     ),
                   ),
-                  children: _photos
-                      .map((photo) =>
-                          buildImageView(photo, _photos.indexOf(photo)))
-                      .toList(),
                   onReorder: ((oldIndex, newIndex) {
                     if (oldIndex < newIndex) {
                       newIndex <= -1;
@@ -123,6 +119,10 @@ class _PhotoOrderState extends ConsumerState<CreateEditPostImageOrderWidget> {
                     _photos.insert(newIndex, post);
                     setState(() {});
                   }),
+                  children: _photos
+                      .map((photo) =>
+                          buildImageView(photo, _photos.indexOf(photo)))
+                      .toList(),
                 ),
                 ElevatedButton(
                   onPressed: () {
@@ -131,7 +131,7 @@ class _PhotoOrderState extends ConsumerState<CreateEditPostImageOrderWidget> {
                         .updatePhotos(_photos);
                     Navigator.of(context).pop;
                   },
-                  child: Text("확인"),
+                  child: const Text("확인"),
                 ),
               ],
             ),

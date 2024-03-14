@@ -1,6 +1,7 @@
-import 'package:email_vertify/views/forgot_password/forgot_password_controller.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:plo/common/widgets/custom_app_bar.dart';
+import 'package:plo/views/forgot_password/forgot_password_controller.dart';
 
 class forgotPasswordCheckEmailScreen extends ConsumerWidget {
   const forgotPasswordCheckEmailScreen({super.key});
@@ -9,16 +10,7 @@ class forgotPasswordCheckEmailScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          leading: BackButton(
-            color: const Color(0xFF000000),
-            onPressed: () {
-              Navigator.pop(context);
-            },
-          ),
-        ),
+        appBar: const BackButtonAppBar(),
         body: SafeArea(
             child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -31,11 +23,11 @@ class forgotPasswordCheckEmailScreen extends ConsumerWidget {
               defaultSpacing,
               const Text("Did not receive an Email?"),
               TextButton(
-                child: Text("resend"),
+                child: const Text("resend"),
                 onPressed: () async {
-                  final snackBar =
+                  const snackBar =
                       SnackBar(content: Text("failed to send an email"));
-                  final snackBar2 = SnackBar(
+                  const snackBar2 = SnackBar(
                     content: Text("we have resent the email"),
                   );
                   final result = await ref

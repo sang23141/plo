@@ -1,24 +1,16 @@
-import 'package:email_vertify/common/validator/validator.dart';
-import 'package:email_vertify/views/forgot_password/forgot_password_check_email/check_email_Screen.dart';
-import 'package:email_vertify/views/forgot_password/forgot_password_controller.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:plo/common/validator/validator.dart';
+import 'package:plo/common/widgets/custom_app_bar.dart';
+import 'package:plo/views/forgot_password/forgot_password_check_email/check_email_Screen.dart';
+import 'package:plo/views/forgot_password/forgot_password_controller.dart';
 
 class ForgotPasswordScreen extends ConsumerWidget {
   const ForgotPasswordScreen({super.key});
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        leading: BackButton(
-          color: const Color(0xFF000000),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-      ),
+      appBar: const BackButtonAppBar(),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -59,7 +51,7 @@ class ForgotPasswordScreen extends ConsumerWidget {
                   showDialog(
                       context: context,
                       builder: (context) =>
-                          Center(child: CircularProgressIndicator()));
+                          const Center(child: CircularProgressIndicator()));
                   final result = await ref
                       .watch(forgotPasswordControllerProvider.notifier)
                       .sendResetPasswordEmail();
@@ -68,7 +60,8 @@ class ForgotPasswordScreen extends ConsumerWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => forgotPasswordCheckEmailScreen(),
+                        builder: (context) =>
+                            const forgotPasswordCheckEmailScreen(),
                       ),
                     );
                   }

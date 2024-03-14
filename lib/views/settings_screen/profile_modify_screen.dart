@@ -1,10 +1,11 @@
-import 'package:email_vertify/common/validator/validator.dart';
-import 'package:email_vertify/common/widget/my_widgets.dart';
-import 'package:email_vertify/views/settings_screen/provider/user_provider.dart';
-import 'package:email_vertify/views/settings_screen/settings_controller.dart';
-import 'package:email_vertify/views/settings_screen/settings_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:plo/common/validator/validator.dart';
+import 'package:plo/common/widgets/custom_app_bar.dart';
+import 'package:plo/common/widgets/my_widgets.dart';
+import 'package:plo/views/settings_screen/provider/user_provider.dart';
+import 'package:plo/views/settings_screen/settings_controller.dart';
+import 'package:plo/views/settings_screen/settings_screen.dart';
 
 class ProfileModifyScreen extends ConsumerStatefulWidget {
   const ProfileModifyScreen({super.key});
@@ -38,20 +39,7 @@ class _ProfileModifyScreenState extends ConsumerState<ProfileModifyScreen> {
     _major.text = user.major;
 
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        leading: BackButton(
-          color: const Color(0xFF000000),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-        title: const Text(
-          "프로필 수정",
-          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-        ),
-      ),
+      appBar: const BackButtonAppBar(title: "프로필 수정"),
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(40.0),

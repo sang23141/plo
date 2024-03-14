@@ -1,10 +1,11 @@
-import 'package:email_vertify/views/sign_up_screen_view/provider/signup_provider.dart';
-import 'package:email_vertify/services/api_service.dart';
-import 'package:email_vertify/vertification_code.dart';
-import 'package:email_vertify/common/widget/my_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:email_vertify/common/validator/validator.dart';
+import 'package:plo/common/validator/validator.dart';
+import 'package:plo/common/widgets/custom_app_bar.dart';
+import 'package:plo/common/widgets/my_widgets.dart';
+import 'package:plo/services/api_service.dart';
+import 'package:plo/vertification_code.dart';
+import 'package:plo/views/sign_up_screen_view/provider/signup_provider.dart';
 
 class SignUpScreen extends ConsumerStatefulWidget {
   const SignUpScreen({super.key});
@@ -75,16 +76,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
         FocusManager.instance.primaryFocus?.unfocus();
       },
       child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          leading: BackButton(
-            color: const Color(0xFF000000),
-            onPressed: () {
-              Navigator.pop(context);
-            },
-          ),
-        ),
+        appBar: const BackButtonAppBar(),
         body: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.fromLTRB(40, 0, 40, 0),

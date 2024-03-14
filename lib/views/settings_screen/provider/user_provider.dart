@@ -1,4 +1,4 @@
-import 'package:email_vertify/model/user.dart' as model;
+import 'package:plo/model/user.dart' as model;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class UserInfoNotifier extends StateNotifier<model.User> {

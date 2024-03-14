@@ -1,9 +1,9 @@
 import 'dart:io';
 
-import 'package:email_vertify/common/utils/log_util.dart';
-import 'package:email_vertify/model/erro_handling/error_handling_auth.dart';
-import 'package:email_vertify/model/types/enum_type.dart';
-import 'package:email_vertify/repository/firebasestoroage_respository.dart';
+import 'package:plo/common/utils/log_util.dart';
+import 'package:plo/model/erro_handling/error_handling_auth.dart';
+import 'package:plo/model/types/enum_type.dart';
+import 'package:plo/repository/firebasestoroage_respository.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -24,10 +24,17 @@ class AuthMethods {
   }) async {
     String res = "Some error occured";
     try {
-      if (email.isNotEmpty || password.isNotEmpty ||nickname.isNotEmpty ||grade.isNotEmpty ||major.isNotEmpty || file != null) {
-        UserCredential cred = await  _auth.createUserWithEmailAndPassword(email: email, password: password);
-        
-        String photoUrl = await StorageMethods().uploadProfileImageToStorage('profilePics', file!, false);
+      if (email.isNotEmpty ||
+          password.isNotEmpty ||
+          nickname.isNotEmpty ||
+          grade.isNotEmpty ||
+          major.isNotEmpty ||
+          file != null) {
+        UserCredential cred = await _auth.createUserWithEmailAndPassword(
+            email: email, password: password);
+
+        String photoUrl = await StorageMethods()
+            .uploadProfileImageToStorage('profilePics', file!, false);
         //이런 방식으로 하면 doc uid가 자동으로 auth uid로 생성이 됨
         _firestore.collection('users').doc(cred.user!.uid).set({
           'grade': grade,

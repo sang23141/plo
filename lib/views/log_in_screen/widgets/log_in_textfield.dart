@@ -1,7 +1,7 @@
-import 'package:email_vertify/common/validator/validator.dart';
-import 'package:email_vertify/views/log_in_screen/log_in_controller.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:plo/common/validator/validator.dart';
+import 'package:plo/views/log_in_screen/log_in_controller.dart';
 
 class LogInTextFieldWidget extends ConsumerWidget {
   final GlobalKey<FormState> formKey;
@@ -21,27 +21,24 @@ class LogInTextFieldWidget extends ConsumerWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("E-Mail"),
+            const Text("E-Mail"),
             defaultSpacing,
             TextFormField(
-              controller: ref.watch(loginController.notifier).emailController,
-              validator: (value) => Validator.validatePSUEmail(value),
-              keyboardType: TextInputType.emailAddress,
-              decoration: InputDecoration(
-                border: Theme.of(context).inputDecorationTheme.border,
-                hintText: 'abc1234@psu.edu',
-              ),
-              onChanged: (text) {
-
-              }
-            ),
+                controller: ref.watch(loginController.notifier).emailController,
+                validator: (value) => Validator.validatePSUEmail(value),
+                keyboardType: TextInputType.emailAddress,
+                decoration: InputDecoration(
+                  border: Theme.of(context).inputDecorationTheme.border,
+                  hintText: 'abc1234@psu.edu',
+                ),
+                onChanged: (text) {}),
             const SizedBox(height: 25),
-            Text("Password"),
+            const Text("Password"),
             defaultSpacing,
             TextFormField(
-              controller: ref.watch(loginController.notifier).passwordController,
+              controller:
+                  ref.watch(loginController.notifier).passwordController,
               validator: (value) => Validator.validatePassword(value),
-
             ),
           ],
         ));
