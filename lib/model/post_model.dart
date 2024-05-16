@@ -63,7 +63,7 @@ class PostModel {
       PostModelFieldNameConstants.postLikes: postLikes,
       PostModelFieldNameConstants.uploadTime: uploadTime,
       PostModelFieldNameConstants.isPostImageBool: isPostImageBool,
-      PostModelFieldNameConstants.category: category,
+      PostModelFieldNameConstants.category: category.toString(),
       PostModelFieldNameConstants.postViewList: postViewList,
       PostModelFieldNameConstants.postViewListLength: postViewListLength,
     };

@@ -1,5 +1,6 @@
 import 'package:plo/model/types/enum_type.dart';
 import 'package:plo/views/forgot_password/forgot_password_screen.dart';
+import 'package:plo/views/home_screen/home_screen.dart';
 import 'package:plo/views/log_in_screen/log_in_controller.dart';
 import 'package:plo/views/log_in_screen/widgets/log_in_textfield.dart';
 import 'package:plo/views/settings_screen/settings_screen.dart';
@@ -79,7 +80,8 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                           context,
                           MaterialPageRoute(
                               builder: (context) =>
-                                  const SettingsScreen() //HomeScreen(),
+                                  // const SettingsScreen()
+                                  const HomeScreen(),
                               ),
                         );
                       } else {

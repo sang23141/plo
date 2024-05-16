@@ -38,6 +38,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     final user = ref.watch(userInfoProvider);
 
     return Scaffold(
+      appBar: AppBar(),
       body: Scrollbar(
         child: SingleChildScrollView(
           child: Padding(
