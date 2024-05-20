@@ -61,6 +61,11 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               ),
             ),
           ),
+          body: Column(
+            children: const [
+              Expanded(child: MainItemList()),
+            ]
+          )
         ),
       ),
     );

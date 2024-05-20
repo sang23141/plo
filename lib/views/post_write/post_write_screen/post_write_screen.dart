@@ -67,7 +67,7 @@ class _CreateEditPostScreenState extends ConsumerState<CreateEditPostScreen> {
                         .read(createEditPostStateController.notifier)
                         .uploadPost(formKey: _formKey);
                     if (result == true) {
-                      ref.refresh(postListController);
+                      ref.refresh(mainpostListController);
                       Navigator.of(context).pop();
                       Navigator.of(context).pop();
                     } else {
